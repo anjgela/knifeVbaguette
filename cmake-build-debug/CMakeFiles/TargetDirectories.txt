@@ -1,0 +1,4 @@
+C:/Users/Utente/Desktop/uni/primo anno/laboratorio di programmazione/labpro/cmake-build-debug/CMakeFiles/core.dir
+C:/Users/Utente/Desktop/uni/primo anno/laboratorio di programmazione/labpro/cmake-build-debug/CMakeFiles/labpro.dir
+C:/Users/Utente/Desktop/uni/primo anno/laboratorio di programmazione/labpro/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Utente/Desktop/uni/primo anno/laboratorio di programmazione/labpro/cmake-build-debug/CMakeFiles/rebuild_cache.dir

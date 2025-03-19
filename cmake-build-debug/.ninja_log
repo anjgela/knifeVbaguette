@@ -1,0 +1,12 @@
+# ninja log v5
+18563	20627	7640376709467720	CMakeFiles/labpro.dir/main.cpp.obj	f1fdc0837607b1fa
+3233	4498	7640383140279872	labpro.exe	68d1caf0e07d2ac7
+3	1860	7640383964213537	build.ninja	30c0268ff4b3bf1f
+4465	5615	7640341187751188	CMakeFiles/core.dir/findpath.cpp.obj	b5975e72fa130f4f
+8	3233	7640376530720743	CMakeFiles/core.dir/Graph.cpp.obj	e3fc71234b3c8e17
+3234	10614	7640376608705175	CMakeFiles/core.dir/MapSearch.cpp.obj	23f328f0ac71ce94
+10614	13528	7640376638341229	CMakeFiles/core.dir/Character.cpp.obj	fef1e480e3258eac
+2854	3233	7640383128094758	libcore.a	bf444e02adb012a3
+3201	4465	7640341176260848	CMakeFiles/core.dir/Game.cpp.obj	ecdcebef3aebbdf8
+48	2853	7640383124467762	CMakeFiles/core.dir/Baguette.cpp.obj	f1b326ece1cb84ba
+13528	16552	7640376668693714	CMakeFiles/core.dir/Knife.cpp.obj	b2e76f427aed69d9

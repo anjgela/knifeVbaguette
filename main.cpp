@@ -12,14 +12,14 @@ int main() {
     MapSearch goal(9, 9, &graph);
 
     // Crea l'istanza dell'algoritmo A* (definito in stlastar.h)
-    AStarSearch<MapSearch> astarsearch;    //FIXME: stlastar changed into AStarSearch
+    AStarSearch<MapSearch> astarsearch;    //ELEFANTE: stlastar changed into AStarSearch
     astarsearch.SetStartAndGoalStates(start, goal);
 
     // Esegue la ricerca a passi
     unsigned int searchState;
     do {
         searchState = astarsearch.SearchStep();
-    } while(searchState == AStarSearch<MapSearch>::SEARCH_STATE_SEARCHING); //FIXME: stlastar changed into AStarSearch
+    } while(searchState == AStarSearch<MapSearch>::SEARCH_STATE_SEARCHING); //ELEFANTE: stlastar changed into AStarSearch
 
     // Se il percorso è stato trovato, lo stampa a video
     if (searchState == AStarSearch<MapSearch>::SEARCH_STATE_SUCCEEDED) {

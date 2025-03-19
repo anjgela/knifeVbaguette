@@ -9,7 +9,7 @@ Graph::Graph(int width, int height) : width(width), height(height) {
     for (int y = 0; y < height; ++y) {
         for (int x = 0; x < width; ++x) {
             int n = x + y * width;
-            nodes[n] = new Node(TILE, x, y);    //FIXME: WHEN RANDOM PLACEMENT OF OBSTACLES: CHANGING COST OF NODES
+            nodes[n] = new Node(TILE, x, y);    //ELEFANTE: WHEN RANDOM PLACEMENT OF OBSTACLES: CHANGING COST OF NODES
         }
     }
     for (int y = 0; y < height; ++y) {

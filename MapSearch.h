@@ -21,7 +21,7 @@ public:
         return (x==nodeGoal.x and y==nodeGoal.y);
     }
 
-    bool GetSuccessors(AStarSearch<MapSearch>* astarsearch, MapSearch* parent); //FIXME: stlastar changed to AStarSearch
+    bool GetSuccessors(AStarSearch<MapSearch>* astarsearch, MapSearch* parent); //ELEFANTE: stlastar changed to AStarSearch
 
     float GetCost(const MapSearch &successor) const {
         return 1.0f;

@@ -1,7 +1,7 @@
 #include "Baguette.h"
 
 
-void Baguette::move(int x, int y, Graph* map) { //FIXME : SFML arrows and awsd keys to move and each corresponds to x<>, y<>
+void Baguette::move(int x, int y, Graph* map) { //ELEFANTE : SFML arrows and awsd keys to move and each corresponds to x<>, y<>
     Node* position = map->getNode(getPosX(),getPosY());
     Node* destination = nullptr;
     if (x < getPosX()) {

@@ -778,7 +778,7 @@ private: // data
     // Closed is an unordered_set
     struct NodeHash {
         size_t operator() (Node* const& n) const {
-            return n->m_UserState.Hash();   //FIXME: Hash() changed into Hash
+            return n->m_UserState.Hash();   //ELEFANTE: Hash() changed into Hash
         }
     };
     struct NodeEqual {

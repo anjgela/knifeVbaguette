@@ -1,8 +1,17 @@
 #include "Knife.h"
 
-void Knife::move(int x, int y, Graph* map) {
+Knife::Knife() {
+    target = Baguette(this);
+    shape.setPosition(0.f, 0.f);  //top left corner of the object
+    shape.setSize(sf::Vector2f(100.f,100.f));
+    shape.setFillColor(sf::Color::Red);
+}
+Knife::~Knife() {
+    delete target;  // Clean up memory
+}
+void Knife::move(Graph* map) {
     MapSearch start(getPosX(),getPosY(),map); //starting node
-    MapSearch goal(x, y, map);  //goal
+    MapSearch goal(target->getPosX(),target->getPosY(), map);  //goal
     std::vector<MapSearch> path;    //solution path
 
     AStarSearch<MapSearch> astarsearch;                     //A* algorithm to find path
@@ -23,7 +32,7 @@ void Knife::move(int x, int y, Graph* map) {
     setPosX(x);
     setPosY(y);
 
-    std::cout << name << " has moved to (" << x << ", " << y << ") through this path: "<< std::endl;
+    std::cout << " knife has moved to (" << x << ", " << y << ") through this path: "<< std::endl;
     for (const auto &node : path) {
         std::cout << "(" << node.GetX() << ", " << node.GetY() << ") -> ";
     }

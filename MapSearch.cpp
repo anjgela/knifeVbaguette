@@ -14,7 +14,7 @@ bool MapSearch::GetSuccessors(AStarSearch<MapSearch>* astarsearch, MapSearch* pa
         //iterating  neighbours
         for (const auto &entry: current->neighbours) {
             Node *neighbour = entry.first;
-            MapSearch newNode(neighbour->x, neighbour->y, graph);
+            MapSearch newNode(neighbour->getX(), neighbour->getY(), graph);
             astarsearch->AddSuccessor(newNode);
         }
     }

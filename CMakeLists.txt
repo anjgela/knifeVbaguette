@@ -17,8 +17,8 @@ set(SOURCE_FILES Graph.h
         fsa.h
         Character.h
         Character.cpp
-        Game.h
-        Game.cpp
+
+
         Knife.cpp
         Knife.h
         Baguette.cpp
@@ -26,7 +26,11 @@ set(SOURCE_FILES Graph.h
         Node.cpp
         Node.h
         Node.h
-        Node.cpp)
+        Node.cpp
+        Menu.cpp
+        Menu.h
+        Match.cpp
+        Match.h)
 add_library(core ${SOURCE_FILES})
 target_link_libraries(core sfml-system sfml-window sfml-graphics sfml-audio sfml-network)
 

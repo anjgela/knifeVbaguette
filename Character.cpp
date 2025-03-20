@@ -4,7 +4,6 @@
 #include "MapSearch.h"
 #include <vector>
 
-void Character::move(int x, int y, Graph* map){}
 
 int Character::getPosX() {
     return posx;

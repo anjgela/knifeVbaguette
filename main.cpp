@@ -45,11 +45,24 @@ int main() {
 #include "stlastar.h"
 #include "Character.h"
 #include "Game.h"
-
-
-
+#include "Menu.h"
+#include <windows.h>
 
 int main() {
+    /*char cwd[MAX_PATH];
+    GetCurrentDirectoryA(MAX_PATH, cwd);
+    std::cout << "Current working directory: " << cwd << std::endl;
+
+    //inti srand
+    srand(static_cast<unsigned>(time(NULL)));
+*/
+    Menu menu;
+    while (menu.isWindowOpen()) {
+        menu.update();
+        menu.render();
+    }
+
+    /*
     //init Game engine
     Game game;
 
@@ -68,7 +81,7 @@ int main() {
     }
 
     //end of application
-
+*/
 
 
 

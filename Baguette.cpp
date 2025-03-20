@@ -1,5 +1,8 @@
 #include "Baguette.h"
 
+Baguette::~Baguette() {
+    delete enemy;
+}
 
 void Baguette::move(int x, int y, Graph* map) { //ELEFANTE : SFML arrows and awsd keys to move and each corresponds to x<>, y<>
     Node* position = map->getNode(getPosX(),getPosY());
@@ -18,6 +21,24 @@ void Baguette::move(int x, int y, Graph* map) { //ELEFANTE : SFML arrows and aws
             destination = map->getDown(position);
         }
     }
-    setPosX(x);
-    setPosY(y);
+    if (destination->getID() != OBSTACLE) {
+        setPosX(x);
+        setPosY(y);
+        //UPDATE KNIFE'S GOAL
+        enemy->move(destination, map);
+    }
+    else {
+        //ELEFANTE: create exception when destination is not reacheable: get slowed or something???
+    }
+
+
+}
+void Baguette::move(Node* destination, Graph* map) {
+    if (destination->getID() != OBSTACLE) {
+        setPosX(destination->getX());
+        setPosY(destination->getY());
+    }
+    else {
+        //ELEFANTE: create exception when destination is not reacheable: get slowed or something???
+    }
 }

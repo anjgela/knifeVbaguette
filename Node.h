@@ -12,18 +12,18 @@ public:
 
     void setCost();
 
-    int getID();
+    unsigned int getID();
     int getX();
     int getY();
     float getCost();
 
     std::unordered_map<Node*, float> neighbours; //adjacency list for neighbours paired with the cost of the edge to reach them
 private:
-    int ID;
+    unsigned int ID;
     int x;
     int y;
     float cost; //calculated by A* algorithm (f=g+h)
-    std::unordered_map<Node*, float> neighbours; //adjacency list for neighbours paired with the cost of the edge to reach them
+
 
 };
 

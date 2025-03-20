@@ -5,14 +5,19 @@
 #include "MapSearch.h"
 #include "Graph.h"
 #include "SFML/Graphics.hpp"
+#include "Knife.h"
 
 class Baguette : public Character {
 public:
-    Baguette();
-    virtual ~Baguette() override;
+    Baguette() : enemy(nullptr) {}
+    Baguette(Knife* enemy) : enemy(enemy) {}
+    virtual ~Baguette();
 
-    void move(int x, int y, Graph* map) override;
-    void move(Node* node, Graph* map) override;
+    void move(Graph* map) override;
+
+private:
+    sf::RectangleShape shape;
+    Knife* enemy;
 };
 
 

@@ -81,14 +81,6 @@ build CMakeFiles/core.dir/Character.cpp.obj: CXX_COMPILER__core_unscanned_Debug 
   OBJECT_DIR = CMakeFiles\core.dir
   OBJECT_FILE_DIR = CMakeFiles\core.dir
 
-build CMakeFiles/core.dir/Game.cpp.obj: CXX_COMPILER__core_unscanned_Debug C$:/Users/Utente/Desktop/uni/primo$ anno/laboratorio$ di$ programmazione/labpro/Game.cpp || cmake_object_order_depends_target_core
-  DEFINES = -DSFML_STATIC
-  DEP_FILE = CMakeFiles\core.dir\Game.cpp.obj.d
-  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
-  INCLUDES = -isystem "C:/Users/Utente/Desktop/uni/primo anno/laboratorio di programmazione/labpro/SFML/include"
-  OBJECT_DIR = CMakeFiles\core.dir
-  OBJECT_FILE_DIR = CMakeFiles\core.dir
-
 build CMakeFiles/core.dir/Knife.cpp.obj: CXX_COMPILER__core_unscanned_Debug C$:/Users/Utente/Desktop/uni/primo$ anno/laboratorio$ di$ programmazione/labpro/Knife.cpp || cmake_object_order_depends_target_core
   DEFINES = -DSFML_STATIC
   DEP_FILE = CMakeFiles\core.dir\Knife.cpp.obj.d
@@ -113,6 +105,22 @@ build CMakeFiles/core.dir/Node.cpp.obj: CXX_COMPILER__core_unscanned_Debug C$:/U
   OBJECT_DIR = CMakeFiles\core.dir
   OBJECT_FILE_DIR = CMakeFiles\core.dir
 
+build CMakeFiles/core.dir/Menu.cpp.obj: CXX_COMPILER__core_unscanned_Debug C$:/Users/Utente/Desktop/uni/primo$ anno/laboratorio$ di$ programmazione/labpro/Menu.cpp || cmake_object_order_depends_target_core
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\core.dir\Menu.cpp.obj.d
+  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+  INCLUDES = -isystem "C:/Users/Utente/Desktop/uni/primo anno/laboratorio di programmazione/labpro/SFML/include"
+  OBJECT_DIR = CMakeFiles\core.dir
+  OBJECT_FILE_DIR = CMakeFiles\core.dir
+
+build CMakeFiles/core.dir/Match.cpp.obj: CXX_COMPILER__core_unscanned_Debug C$:/Users/Utente/Desktop/uni/primo$ anno/laboratorio$ di$ programmazione/labpro/Match.cpp || cmake_object_order_depends_target_core
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\core.dir\Match.cpp.obj.d
+  FLAGS = -g -std=gnu++11 -fdiagnostics-color=always
+  INCLUDES = -isystem "C:/Users/Utente/Desktop/uni/primo anno/laboratorio di programmazione/labpro/SFML/include"
+  OBJECT_DIR = CMakeFiles\core.dir
+  OBJECT_FILE_DIR = CMakeFiles\core.dir
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target core
@@ -121,7 +129,7 @@ build CMakeFiles/core.dir/Node.cpp.obj: CXX_COMPILER__core_unscanned_Debug C$:/U
 #############################################
 # Link the static library libcore.a
 
-build libcore.a: CXX_STATIC_LIBRARY_LINKER__core_Debug CMakeFiles/core.dir/Graph.cpp.obj CMakeFiles/core.dir/MapSearch.cpp.obj CMakeFiles/core.dir/findpath.cpp.obj CMakeFiles/core.dir/Character.cpp.obj CMakeFiles/core.dir/Game.cpp.obj CMakeFiles/core.dir/Knife.cpp.obj CMakeFiles/core.dir/Baguette.cpp.obj CMakeFiles/core.dir/Node.cpp.obj
+build libcore.a: CXX_STATIC_LIBRARY_LINKER__core_Debug CMakeFiles/core.dir/Graph.cpp.obj CMakeFiles/core.dir/MapSearch.cpp.obj CMakeFiles/core.dir/findpath.cpp.obj CMakeFiles/core.dir/Character.cpp.obj CMakeFiles/core.dir/Knife.cpp.obj CMakeFiles/core.dir/Baguette.cpp.obj CMakeFiles/core.dir/Node.cpp.obj CMakeFiles/core.dir/Menu.cpp.obj CMakeFiles/core.dir/Match.cpp.obj
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = CMakeFiles\core.dir
   POST_BUILD = cd .

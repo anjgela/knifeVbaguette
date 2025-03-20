@@ -16,7 +16,7 @@ void Node::setCost() {
     }
 }
 
-int Node::getID() {
+unsigned int Node::getID() {
     return ID;
 }
 int Node::getX() {

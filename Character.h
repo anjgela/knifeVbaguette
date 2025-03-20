@@ -11,8 +11,12 @@ public:
     Character() : posx(0), posy(0) {}
     virtual ~Character();
 
-    virtual void move(int x, int y, Graph* map);
-    virtual void move(Node* node, Graph* map);
+    /*    CHANGE MOVE: ARGUMENTS ONLY MAP:
+     * BAGUETTE GETS DESTINATION FROM KEYBORD
+     * KNIFE GETS DESTINATION FROM BAGUETTES POSITION
+     */
+    virtual void move( Graph* map);
+
 
     int getPosX();
     int getPosY();

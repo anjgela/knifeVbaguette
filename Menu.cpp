@@ -2,19 +2,17 @@
 
 //public methods
 Menu::Menu() {
-    play = Button();
     Menu::initVariables();
     Menu::initWindow();
-
 }
 Menu::~Menu(){
     delete window;
+    delete game;
 }
 void Menu::update() {
     Menu::pollEvents();
     Menu::updateMousePosWindow();
 }
-
 void Menu::render() {
     window->clear(sf::Color::Black);
     //draw menu objects here
@@ -23,33 +21,42 @@ void Menu::render() {
     window->draw(play.text);
     window->display();
 }
-const bool Menu::isWindowOpen() const {
+bool Menu::isWindowOpen() const {
     return window->isOpen();
 }
 
 //private methods
-
-
 void Menu::pollEvents() {
-    while(window->pollEvent(ev)) {
-        switch (ev.type) {
-            case sf::Event::Closed:
-                window->close();
-                break;
-            case sf::Event::KeyPressed:
-                if(ev.key.code == sf::Keyboard::Escape) {
+    while (isWindowOpen()) {
+        while (window->pollEvent(ev)) {
+            switch (ev.type) {
+                case sf::Event::Closed:
                     window->close();
-                }
-                /*else if(ev.key.code == sf::Keyboard::Enter) {
-                    match = new Match();
-                }
-                break;*/
+                    break;
+                case sf::Event::KeyPressed:
+                    if (ev.key.code == sf::Keyboard::Escape) {
+                        window->close();
+                    }
+                    break;
+                case sf::Event::MouseButtonPressed: //init game
+                    if (ev.mouseButton.button == sf::Mouse::Button::Left) {
+                        if (mousePosWindow.x > play.shape.getPosition().x
+                            && mousePosWindow.x < (play.shape.getPosition().x + play.shape.getSize().x)
+                            && mousePosWindow.y > play.shape.getPosition().y
+                            && mousePosWindow.y < (play.shape.getPosition().y + play.shape.getSize().y)) {
+                            window->close();
+                            game = new Match();
+                        }
+                    }
+                    break;
+            }
         }
     }
 }
 void Menu::initVariables() {
     //window
-    this->window = nullptr;
+    window = nullptr;
+
 
     //title
     title.setSize(sf::Vector2f(300.f,100.f));
@@ -64,18 +71,20 @@ void Menu::initVariables() {
     title.setFillColor(sf::Color::Yellow);
 
     //button
-    playFont.loadFromFile("C:/Users/Utente/Desktop/uni/primo anno/laboratorio di programmazione/labpro/cmake-build-debug/Hot Food.otf");
+    playFont.loadFromFile("Hot Food.otf");
     if (!playFont.loadFromFile("Hot Food.otf")) {
         std::cerr << "Error loading font" << std::endl;
     };
-    play = Button("PLAY", playFont, 25, sf::Color::Magenta, sf::Vector2f(400.f,250.f), sf::Vector2f(350.f,350.f));
+    play = Button("PLAY", playFont, 25, sf::Color::Magenta, sf::Vector2f(400.f,250.f), sf::Vector2i(350,350));
+    game = nullptr;
 }
 void Menu::initWindow() {
     videoMode.width = 800;
     videoMode.height = 600;
     window = new sf::RenderWindow(sf::VideoMode(videoMode.width, videoMode.height),
-                                  "game window", sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize);
-    window->setFramerateLimit(144);
+                                  "knifeVbaguette:MENU", sf::Style::Default); //default: titlebar, resize, close
+    window->setFramerateLimit(60);
+    window->setVerticalSyncEnabled(true);   //synchronize application refresh rate w/ vertical frequency of the monitor
 }
 void Menu::updateMousePosWindow() {
     mousePosWindow = sf::Mouse::getPosition(*window);

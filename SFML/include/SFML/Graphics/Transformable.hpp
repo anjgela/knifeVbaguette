@@ -81,7 +81,7 @@ public:
     /// \see move, getPosition
     ///
     ////////////////////////////////////////////////////////////
-    void setPosition(const Vector2f& position);
+    void setPosition(Vector2<int> position);
 
     ////////////////////////////////////////////////////////////
     /// \brief set the orientation of the object

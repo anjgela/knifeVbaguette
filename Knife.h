@@ -6,19 +6,19 @@
 #include "Graph.h"
 #include <vector>
 #include <SFML/Graphics.hpp>
-#include "Baguette.h"
+
 
 class Knife : public Character{
 public:
     Knife();
     virtual ~Knife();
 
-    void move(Graph* map) override;
+    void move(int x, int y, Graph* map);
     //everytime Baguette moves, its position becomes Knife's goal and its move method must be updated
 
-private:
-    sf::RectangleShape shape;
-    Baguette* target;
+    sf::RectangleShape getShape();
+
+
 };
 
 

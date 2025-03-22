@@ -9,14 +9,21 @@
 
 class Baguette : public Character {
 public:
-    Baguette() : enemy(nullptr) {}
-    Baguette(Knife* enemy) : enemy(enemy) {}
+    Baguette() = default;
+    Baguette(Knife* knife);
     virtual ~Baguette();
 
-    void move(Graph* map) override;
+    void moveRight(Graph* map);
+    void moveLeft(Graph* map);
+    void moveUp(Graph* map);
+    void moveDown(Graph* map);
 
+
+    sf::RectangleShape getShape() const {
+        return shape;
+    }
 private:
-    sf::RectangleShape shape;
+    void moveAux(Graph* map);
     Knife* enemy;
 };
 

@@ -5,6 +5,7 @@
 #include "MapSearch.h"
 #include "Graph.h"
 #include <vector>
+#include <SFML/Graphics.hpp>
 
 class Character {
 public:
@@ -15,7 +16,6 @@ public:
      * BAGUETTE GETS DESTINATION FROM KEYBORD
      * KNIFE GETS DESTINATION FROM BAGUETTES POSITION
      */
-    virtual void move( Graph* map);
 
 
     int getPosX();
@@ -24,9 +24,10 @@ public:
     void setPosX(int x);
     void setPosY(int y);
 
-private:
+protected:
     int posx;
     int posy;
+    sf::RectangleShape shape;
 
 };
 

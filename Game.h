@@ -6,12 +6,14 @@
 
 #include <iostream>
 #include <vector>
+#include <ctime>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
+
 
 class Game {
 public:
@@ -21,6 +23,9 @@ public:
     void render();
     const bool windowIsOpen() const;
     void pollEvents();
+    void spawnEnemy();
+    void updateEnemies();
+    void renderEnemies();
 
 
 private:
@@ -31,7 +36,6 @@ private:
     std::vector<sf::RectangleShape> enemies;
     sf::RectangleShape enemy;
 
-
     sf::Vector2i mousePosWindow;
 
     void initVariables();
@@ -39,6 +43,13 @@ private:
     void initEnemies();
 
     void updateMousePositions();
+
+    //game logic:
+    int points;
+    float enemySpawnTimer;
+    float enemySpawnTimerMax;
+    unsigned int maxEnemies;
+
 
 
 };

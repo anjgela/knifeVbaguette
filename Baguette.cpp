@@ -1,44 +1,36 @@
 #include "Baguette.h"
-
+Baguette::Baguette(Knife* knife) : enemy(knife) {
+    posx = 350;
+    posy = 250;
+    shape.setPosition(350.f,250.f);  //top left corner of the object
+    shape.setSize(sf::Vector2f(100.f,100.f));
+    shape.setFillColor(sf::Color::Green);
+}
 Baguette::~Baguette() {
     delete enemy;
 }
 
-void Baguette::move(int x, int y, Graph* map) { //ELEFANTE : SFML arrows and awsd keys to move and each corresponds to x<>, y<>
-    Node* position = map->getNode(getPosX(),getPosY());
-    Node* destination = nullptr;
-    if (x < getPosX()) {
-        destination = map->getLeft(position);
+void Baguette::moveRight(Graph* map) {
+    if (map->getNode(posx+1, posy)->getID() == TILE) {
+        posx += 1;
+        enemy->move(posx, posy, map);
     }
-    else if (x > getPosX()) {
-        destination = map->getRight(position);
-    }
-    else {
-        if (y < getPosY()) {
-            destination = map->getTop(position);
-        }
-        else {
-            destination = map->getDown(position);
-        }
-    }
-    if (destination->getID() != OBSTACLE) {
-        setPosX(x);
-        setPosY(y);
-        //UPDATE KNIFE'S GOAL
-        enemy->move(destination, map);
-    }
-    else {
-        //ELEFANTE: create exception when destination is not reacheable: get slowed or something???
-    }
-
-
 }
-void Baguette::move(Node* destination, Graph* map) {
-    if (destination->getID() != OBSTACLE) {
-        setPosX(destination->getX());
-        setPosY(destination->getY());
+void Baguette::moveLeft(Graph* map) {
+    if (map->getNode(posx - 1, posy)->getID() == TILE) {
+        posx -= 1;
+        enemy->move(posx, posy, map);
     }
-    else {
-        //ELEFANTE: create exception when destination is not reacheable: get slowed or something???
+}
+void Baguette::moveUp(Graph* map) {
+    if (map->getNode(posx, posy-1)->getID() == TILE) {
+        posy -= 1;
+        enemy->move(posx, posy, map);
+    }
+}
+void Baguette::moveDown(Graph* map) {
+    if (map->getNode(posx, posy + 1)->getID() == TILE) {
+        posy += 1;
+        enemy->move(posx, posy, map);
     }
 }

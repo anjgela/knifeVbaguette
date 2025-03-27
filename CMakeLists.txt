@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.26)
 project(labpro)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_EXE_LINKER_FLAGS "-static")
 
 set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR SFML/lib/cmake/SFML)
@@ -17,8 +18,6 @@ set(SOURCE_FILES Graph.h
         fsa.h
         Character.h
         Character.cpp
-
-
         Knife.cpp
         Knife.h
         Baguette.cpp

@@ -6,32 +6,13 @@
 #include <ctime>
 
 #include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
 
 #include "Match.h"
-
-struct Button {
-    Button() = default;
-    Button(const std::string& text, const sf::Font& font, unsigned int charSize, sf::Color color, sf::Vector2f size, sf::Vector2i position)
-    : text(text, font, charSize)  {
-        shape.setSize(size);
-        shape.setPosition(position);
-        shape.setFillColor(color);
-        this->text.setPosition(shape.getPosition().x+50, shape.getPosition().y+50);
-        this->text.setFillColor(sf::Color::Black);
-    }
-    sf::Text text;
-    sf::RectangleShape shape;
-};
-
 
 class Menu {
 public:
     Menu();
-    ~Menu();
+    virtual ~Menu();
     void update();
     void render();
     bool isWindowOpen() const;
@@ -49,8 +30,9 @@ private:
     sf::Vector2i mousePosWindow;
 
     sf::RectangleShape title;
-    sf::Font playFont;
-    Button play;
+    sf::RectangleShape playShape;
+    sf::Font font;
+    sf::Text playText;
 
     Match* game;
 

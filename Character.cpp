@@ -4,7 +4,6 @@
 #include "MapSearch.h"
 #include <vector>
 
-
 int Character::getPosX() {
     return posx;
 }

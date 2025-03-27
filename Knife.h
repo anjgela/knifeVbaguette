@@ -11,7 +11,7 @@
 class Knife : public Character{
 public:
     Knife();
-    virtual ~Knife();
+    ~Knife() override;
 
     void move(int x, int y, Graph* map);
     //everytime Baguette moves, its position becomes Knife's goal and its move method must be updated

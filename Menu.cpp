@@ -14,11 +14,11 @@ void Menu::update() {
     Menu::updateMousePosWindow();
 }
 void Menu::render() {
-    window->clear(sf::Color::Black);
+    window->clear();
     //draw menu objects here
     window->draw(title);
-    window->draw(play.shape);
-    window->draw(play.text);
+    window->draw(playShape);
+    window->draw(playText);
     window->display();
 }
 bool Menu::isWindowOpen() const {
@@ -40,12 +40,16 @@ void Menu::pollEvents() {
                     break;
                 case sf::Event::MouseButtonPressed: //init game
                     if (ev.mouseButton.button == sf::Mouse::Button::Left) {
-                        if (mousePosWindow.x > play.shape.getPosition().x
-                            && mousePosWindow.x < (play.shape.getPosition().x + play.shape.getSize().x)
-                            && mousePosWindow.y > play.shape.getPosition().y
-                            && mousePosWindow.y < (play.shape.getPosition().y + play.shape.getSize().y)) {
+                        if (mousePosWindow.x > playShape.getPosition().x
+                        && mousePosWindow.x < (playShape.getPosition().x + playShape.getSize().x)
+                        && mousePosWindow.y > playShape.getPosition().y
+                        && mousePosWindow.y < (playShape.getPosition().y + playShape.getSize().y)) {
                             window->close();
                             game = new Match();
+                            while (game->isWindowOpen()) {
+                                game->update();
+                                game->render();
+                            }
                         }
                     }
                     break;
@@ -54,10 +58,6 @@ void Menu::pollEvents() {
     }
 }
 void Menu::initVariables() {
-    //window
-    window = nullptr;
-
-
     //title
     title.setSize(sf::Vector2f(300.f,100.f));
     title.setPosition(350.f, 250.f);
@@ -71,11 +71,16 @@ void Menu::initVariables() {
     title.setFillColor(sf::Color::Yellow);
 
     //button
-    playFont.loadFromFile("Hot Food.otf");
-    if (!playFont.loadFromFile("Hot Food.otf")) {
+    playShape.setSize(sf::Vector2f(400.f, 250.f));
+    playShape.setPosition(350.f,350.f);
+    playShape.setFillColor(sf::Color::Magenta);
+    font.loadFromFile("Hot Food.otf");
+    if (!font.loadFromFile("Hot Food.otf")) {
         std::cerr << "Error loading font" << std::endl;
     };
-    play = Button("PLAY", playFont, 25, sf::Color::Magenta, sf::Vector2f(400.f,250.f), sf::Vector2i(350,350));
+    playText = sf::Text("PLAY", font, 25);
+    playText.setFillColor(sf::Color::Black);
+    playText.setPosition(playShape.getPosition().x+50.f,playShape.getPosition().y+50.f);
     game = nullptr;
 }
 void Menu::initWindow() {

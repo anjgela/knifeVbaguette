@@ -9,8 +9,8 @@
 
 class Character {
 public:
-    Character() : posx(0), posy(0) {}
-    virtual ~Character();
+    Character() = default;
+    virtual ~Character() = default;
 
     /*    CHANGE MOVE: ARGUMENTS ONLY MAP:
      * BAGUETTE GETS DESTINATION FROM KEYBORD
@@ -25,8 +25,8 @@ public:
     void setPosY(int y);
 
 protected:
-    int posx;
-    int posy;
+    int posx = 0;
+    int posy = 0;
     sf::RectangleShape shape;
 
 };

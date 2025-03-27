@@ -11,7 +11,7 @@ class Baguette : public Character {
 public:
     Baguette() = default;
     Baguette(Knife* knife);
-    virtual ~Baguette();
+    virtual ~Baguette() override;
 
     void moveRight(Graph* map);
     void moveLeft(Graph* map);

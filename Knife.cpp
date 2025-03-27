@@ -1,7 +1,9 @@
 #include "Knife.h"
 Knife::Knife() {
-    shape.setPosition(0.f, 0.f);  //top left corner of the object
-    shape.setSize(sf::Vector2f(100.f,100.f));
+    posx = 0;
+    posy = 0;
+    shape.setSize(sf::Vector2f(50.f,50.f)); //every node consists of 50 pixels
+    shape.setPosition(posx*shape.getSize().x, posy*shape.getSize().y);  //top left corner of the object
     shape.setFillColor(sf::Color::Red);
 }
 Knife::~Knife() {
@@ -28,6 +30,7 @@ void Knife::move(int x, int y, Graph* map) {
 
     posx = x;
     posy = y;
+    shape.setPosition(posx*shape.getSize().x, posy*shape.getSize().y);
 
     /*std::cout << " knife has moved to (" << posX << ", " << posY << ") through this path: "<< std::endl;
     for (const auto &node : path) {

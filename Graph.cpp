@@ -3,8 +3,12 @@
 //
 
 #include "Graph.h"
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 
-Graph::Graph(int width, int height) : width(width), height(height) {
+Graph::Graph() {
+    width = sf::VideoMode::getDesktopMode().width / 50;
+    height = sf::VideoMode::getDesktopMode().height / 50;
     nodes.resize(width * height);
     for (int y = 0; y < height; ++y) {
         for (int x = 0; x < width; ++x) {
@@ -40,7 +44,6 @@ Graph::~Graph() {
         delete node;
     }
 }
-
 
 int Graph::getWidth() const {
     return width;
@@ -96,3 +99,12 @@ Node* Graph::getDown(Node *node) const {
     return nullptr;
 }
 
+std::vector<Node*> Graph::getNodes() const {
+    return nodes;
+}
+
+void Graph::display() {
+    for (auto node : nodes) {
+
+    }
+}

@@ -5,10 +5,11 @@
 #define LABPRO_GRAPH_H
 
 #include "Node.h"
+#include <SFML/Graphics.hpp>
 
 class Graph {
 public:
-    Graph(int width, int height);
+    Graph();
     virtual ~Graph();
 
     int getWidth() const;
@@ -20,11 +21,13 @@ public:
     Node* getTop(Node* node) const;
     Node* getDown(Node* node) const;
 
-
+    std::vector<Node*> getNodes() const;
+    void display();
 private:
     int width;
     int height;
     std::vector<Node*> nodes;
+
 };
 
 

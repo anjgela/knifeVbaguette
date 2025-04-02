@@ -17,6 +17,7 @@ void Baguette::moveRight(Graph* map) {
         shape.setPosition(posx*50.f, shape.getPosition().y);
         enemy->move(posx, posy, map);
     }
+
 }
 void Baguette::moveLeft(Graph* map) {
     if (map->getNode(posx - 1, posy)->getID() == TILE) {

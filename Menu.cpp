@@ -2,8 +2,8 @@
 
 //public methods
 Menu::Menu() {
-    Menu::initVariables();
     Menu::initWindow();
+    Menu::initVariables();
 }
 Menu::~Menu(){
     delete window;
@@ -16,7 +16,8 @@ void Menu::update() {
 void Menu::render() {
     window->clear();
     //draw menu objects here
-    window->draw(title);
+    window->draw(titleShape);
+    window->draw(titleText);
     window->draw(playShape);
     window->draw(playText);
     window->display();
@@ -27,61 +28,32 @@ bool Menu::isWindowOpen() const {
 
 //private methods
 void Menu::pollEvents() {
-    while (isWindowOpen()) {
-        while (window->pollEvent(ev)) {
-            switch (ev.type) {
-                case sf::Event::Closed:
-                    window->close();
-                    break;
-                case sf::Event::KeyPressed:
-                    if (ev.key.code == sf::Keyboard::Escape) {
-                        window->close();
-                    }
-                    break;
-                case sf::Event::MouseButtonPressed: //init game
-                    if (ev.mouseButton.button == sf::Mouse::Button::Left) {
-                        if (mousePosWindow.x > playShape.getPosition().x
-                        && mousePosWindow.x < (playShape.getPosition().x + playShape.getSize().x)
-                        && mousePosWindow.y > playShape.getPosition().y
-                        && mousePosWindow.y < (playShape.getPosition().y + playShape.getSize().y)) {
-                            window->close();
-                            game = new Match();
-                            while (game->isWindowOpen()) {
-                                game->update();
-                                game->render();
-                            }
-                        }
-                    }
-                    break;
+    window->pollEvent(ev);
+    switch (ev.type) {
+        case sf::Event::Closed:
+            window->close();
+            break;
+        case sf::Event::KeyPressed:
+            if (ev.key.code == sf::Keyboard::Escape) {
+                window->close();
             }
-        }
+            break;
+        case sf::Event::MouseButtonPressed: //init game
+             if (ev.mouseButton.button == sf::Mouse::Button::Left) {
+                if (mousePosWindow.x > playShape.getPosition().x
+                && mousePosWindow.x < (playShape.getPosition().x + playShape.getSize().x)
+                && mousePosWindow.y > playShape.getPosition().y
+                && mousePosWindow.y < (playShape.getPosition().y + playShape.getSize().y)) {
+                    window->close();
+                    game = new Match();
+                    while (game->isWindowOpen()) {
+                        game->update();
+                        game->render();
+                    }
+                }
+             }
+             break;
     }
-}
-void Menu::initVariables() {
-    //title
-    title.setSize(sf::Vector2f(300.f,100.f));
-    title.setPosition(350.f, 250.f);
-    /*
-    sf::Texture texture;
-    if (!texture.loadFromFile("")) {    //ELEFANTE: PROBLEMS WITH LOADING FILE
-        std::cerr << "Error loading texture!" << std::endl;
-    }
-    title.setTexture(&texture);
-    */
-    title.setFillColor(sf::Color::Yellow);
-
-    //button
-    playShape.setSize(sf::Vector2f(400.f, 250.f));
-    playShape.setPosition(350.f,350.f);
-    playShape.setFillColor(sf::Color::Magenta);
-    font.loadFromFile("Hot Food.otf");
-    if (!font.loadFromFile("Hot Food.otf")) {
-        std::cerr << "Error loading font" << std::endl;
-    };
-    playText = sf::Text("PLAY", font, 25);
-    playText.setFillColor(sf::Color::Black);
-    playText.setPosition(playShape.getPosition().x+50.f,playShape.getPosition().y+50.f);
-    game = nullptr;
 }
 void Menu::initWindow() {
     videoMode.width = 800;
@@ -89,8 +61,38 @@ void Menu::initWindow() {
     window = new sf::RenderWindow(sf::VideoMode(videoMode.width, videoMode.height),
                                   "knifeVbaguette:MENU", sf::Style::Default); //default: titlebar, resize, close
     window->setFramerateLimit(60);
-    window->setVerticalSyncEnabled(true);   //synchronize application refresh rate w/ vertical frequency of the monitor
 }
+void Menu::initVariables() {
+    //font
+    font.loadFromFile("Hot Food.otf");
+    if (!font.loadFromFile("Hot Food.otf")) {
+        std::cerr << "Error loading font" << std::endl;
+    }
+
+    //title
+    titleShape.setSize(sf::Vector2f(700.f,200.f));
+    titleShape.setPosition((videoMode.width/2) - (titleShape.getSize().x/2), videoMode.height/5);
+    titleShape.setFillColor(sf::Color::Red);
+
+    titleText = sf::Text("KNIFE V BAGUETTE", font, 90);
+    titleText.setFillColor(sf::Color::White);
+    titleText.setPosition(titleShape.getPosition().x + titleShape.getSize().x/2 - titleText.getLocalBounds().width/2,
+                          titleShape.getPosition().y + titleShape.getSize().y/2 - titleText.getLocalBounds().height/2);
+
+    //button
+    playShape.setSize(sf::Vector2f(400.f, 200.f));
+    playShape.setPosition((videoMode.width/2) - (playShape.getSize().x/2), videoMode.height*3/5);
+    playShape.setFillColor(sf::Color::Magenta);
+
+    playText = sf::Text("PLAY", font, 150);
+    playText.setFillColor(sf::Color::White);
+    playText.setPosition(playShape.getPosition().x + playShape.getSize().x/2 - playText.getLocalBounds().width/2,
+                         playShape.getPosition().y + playShape.getSize().y/2 - playText.getLocalBounds().height/2);
+
+    //game window
+    game = nullptr;
+}
+
 void Menu::updateMousePosWindow() {
     mousePosWindow = sf::Mouse::getPosition(*window);
 }

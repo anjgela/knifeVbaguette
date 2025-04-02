@@ -27,7 +27,12 @@ void Knife::move(int x, int y, Graph* map) {
     }   else {
         std::cout << "path not found" << std::endl;
     }    astarsearch.FreeSolutionNodes();    //free allocated memory for the solution nodes
-
+    /*
+    for (auto node : path) {
+        posx = node.GetX();
+        posy = node.GetY();
+    }
+    ELEFANTE: trovare un modo per far muovere più lentamente il coltello*/
     posx = x;
     posy = y;
     shape.setPosition(posx*shape.getSize().x, posy*shape.getSize().y);

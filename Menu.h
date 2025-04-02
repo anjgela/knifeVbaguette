@@ -29,9 +29,10 @@ private:
     sf::Event ev;
     sf::Vector2i mousePosWindow;
 
-    sf::RectangleShape title;
-    sf::RectangleShape playShape;
     sf::Font font;
+    sf::RectangleShape titleShape;
+    sf::Text titleText;
+    sf::RectangleShape playShape;
     sf::Text playText;
 
     Match* game;

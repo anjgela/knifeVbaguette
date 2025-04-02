@@ -254,6 +254,9 @@ Ogg_LIB:FILEPATH=C:/Users/Utente/Desktop/uni/primo anno/laboratorio di programma
 //Path to a library.
 OpenAL_LIB:FILEPATH=C:/Users/Utente/Desktop/uni/primo anno/laboratorio di programmazione/labpro/SFML/lib/libopenal32.a
 
+//The directory containing a CMake configuration file for SFML3.
+SFML3_DIR:PATH=SFML3_DIR-NOTFOUND
+
 //The directory containing a CMake configuration file for SFML.
 SFML_DIR:PATH=SFML_DIR-NOTFOUND
 

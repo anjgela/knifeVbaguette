@@ -29,19 +29,19 @@ int main() {
     window.display();
 */
 
-/*
+
     Menu menu;
     while (menu.isWindowOpen()) {
         menu.update();
         menu.render();
     }
-*/
+/*
     Match game;
     while (game.isWindowOpen()) {
         game.update();
         game.render();
     }
-
+*/
     return 0;
 }
 

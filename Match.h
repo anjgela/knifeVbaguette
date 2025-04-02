@@ -36,9 +36,9 @@ private:
 
     bool paused = false;
 
+    sf::Font font;
     sf::RectangleShape pauseVeil;
     sf::RectangleShape resumeShape;
-    sf::Font font;
     sf::Text resumeText;
     sf::RectangleShape exitShape;
     sf::Text exitText;

@@ -17,11 +17,12 @@ void Match::update() {
     static int counter = 0;
     if (!paused) {
         Match::pollEvents();
+        knife->update(map);
+        std::cerr << "Test " << counter++ << std::endl;
     } else {
         pollPauseEvents();
     }
     Match::updateMousePosWindow();
-    std::cerr << "Test " << counter++ << std::endl;
 }
 
 void Match::render() {

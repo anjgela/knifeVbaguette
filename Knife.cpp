@@ -1,5 +1,5 @@
 #include "Knife.h"
-Knife::Knife() {
+Knife::Knife() : currentPathIndex(0) {
     posx = 0;
     posy = 0;
     shape.setSize(sf::Vector2f(50.f,50.f)); //every node consists of 50 pixels
@@ -11,7 +11,10 @@ Knife::~Knife() {
 void Knife::move(int x, int y, Graph* map) {
     MapSearch start(getPosX(),getPosY(),map); //starting node
     MapSearch goal(x,y, map);  //goal
-    std::vector<MapSearch> path;    //solution path
+    path.clear();
+
+    std::cout << "START: " <<start.GetX() << ", " << start.GetY() << std::endl;
+    std::cout << "GOAL: " << goal.GetX() << ", " << goal.GetY() << std::endl;
 
     AStarSearch<MapSearch> astarsearch;                     //A* algorithm to find path
     astarsearch.SetStartAndGoalStates(start, goal);
@@ -19,28 +22,31 @@ void Knife::move(int x, int y, Graph* map) {
     do {
         searchState = astarsearch.SearchStep();
     } while (searchState == AStarSearch<MapSearch>::SEARCH_STATE_SEARCHING);
-    if (searchState == AStarSearch<MapSearch>::SEARCH_STATE_SUCCEEDED) {
-        MapSearch* node = astarsearch.GetSolutionNext();
-        while ( node != nullptr) {
-            path.push_back(*node);
-        }
-    }   else {
-        std::cout << "path not found" << std::endl;
-    }    astarsearch.FreeSolutionNodes();    //free allocated memory for the solution nodes
-    /*
-    for (auto node : path) {
-        posx = node.GetX();
-        posy = node.GetY();
-    }
-    ELEFANTE: trovare un modo per far muovere più lentamente il coltello*/
-    posx = x;
-    posy = y;
-    shape.setPosition(posx*shape.getSize().x, posy*shape.getSize().y);
 
-    /*std::cout << " knife has moved to (" << posX << ", " << posY << ") through this path: "<< std::endl;
-    for (const auto &node : path) {
-        std::cout << "(" << node.GetX() << ", " << node.GetY() << ") -> ";
-    }*/
+    if (searchState == AStarSearch<MapSearch>::SEARCH_STATE_SUCCEEDED) {
+        MapSearch* node = astarsearch.GetSolutionStart();
+        std::cout << "CURRENT NODE : " << node->GetX() << ", " << node->GetY() << std::endl;
+        while (node != nullptr) {
+            path.push_back(*node);
+            node = astarsearch.GetSolutionNext();
+        }
+        std::cout << "Path found with " << path.size() << " nodes." << std::endl;
+    } else {
+        std::cout << "path not found" << std::endl;
+    }
+    astarsearch.FreeSolutionNodes();    //free allocated memory for the solution nodes
+
+    currentPathIndex = 0;
+}
+
+void Knife::update(Graph* map) {
+    if (currentPathIndex < path.size()) {
+        posx = path[currentPathIndex].GetX();
+        posy = path[currentPathIndex].GetY();
+        shape.setPosition(posx*shape.getSize().x, posy*shape.getSize().y);
+        currentPathIndex++;
+        std::cout << "Knife position: " << posx << ", " << posy << std::endl;
+    }
 }
 
 sf::RectangleShape Knife::getShape() {

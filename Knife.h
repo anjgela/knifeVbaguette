@@ -14,9 +14,13 @@ public:
     ~Knife() override;
 
     void move(int x, int y, Graph* map);
-    //everytime Baguette moves, its position becomes Knife's goal and its move method must be updated
+    void update(Graph* map);
 
     sf::RectangleShape getShape();
+
+private:
+    std::vector<MapSearch> path;
+    size_t currentPathIndex = 0;
 
 
 };

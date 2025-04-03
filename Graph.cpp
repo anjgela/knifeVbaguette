@@ -45,6 +45,14 @@ Graph::~Graph() {
     }
 }
 
+bool Graph::isWalkable(int x, int y) const {
+    if (x < 0 || x >= width || y < 0 || y >= height) {
+        return false;
+    }
+    Node* node = nodes[x + y * width];
+    return node->getID() == TILE; // Check if the node is walkable
+}
+
 int Graph::getWidth() const {
     return width;
 }

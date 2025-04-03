@@ -12,6 +12,7 @@ public:
     Graph();
     virtual ~Graph();
 
+    bool isWalkable(int x, int y) const;
     int getWidth() const;
     int getHeight() const;
 

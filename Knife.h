@@ -21,6 +21,9 @@ public:
 private:
     std::vector<MapSearch> path;
     size_t currentPathIndex = 0;
+    sf::Clock clock;
+
+
 
 
 };

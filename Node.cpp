@@ -1,32 +1,32 @@
 #include "Node.h"
 
-Node::Node(int id) : ID(id), x(0), y(0) {
+Node::Node(NodeType id) : ID(id), x(0), y(0) {
     setCost();
     shape.setSize(sf::Vector2f(50.f, 50.f));
 }
-Node::Node(int id, int x, int y) : ID(id), x(x), y(y) {
+Node::Node(NodeType id, int x, int y) : ID(id), x(x), y(y) {
     setCost();
 }
 
 void Node::setCost() {
     if (ID == TILE) {
-        cost = 1.0f;
+        cost = 1.f;
     }
     else if (ID == OBSTACLE) {
-        cost = 25.0f;
+        cost = 100.f;
     }
 }
 
-unsigned int Node::getID() {
+NodeType Node::getID() const {
     return ID;
 }
-int Node::getX() {
+int Node::getX() const {
     return x;
 }
-int Node::getY() {
+int Node::getY() const {
     return y;
 }
-float Node::getCost() {
+float Node::getCost() const {
     return cost;
 }
 

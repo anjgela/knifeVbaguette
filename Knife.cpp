@@ -5,6 +5,7 @@ Knife::Knife() : currentPathIndex(0) {
     shape.setSize(sf::Vector2f(50.f,50.f)); //every node consists of 50 pixels
     shape.setPosition(posx*shape.getSize().x, posy*shape.getSize().y);  //top left corner of the object
     shape.setFillColor(sf::Color::Red);
+    clock.restart();
 }
 Knife::~Knife() {
 }
@@ -40,14 +41,19 @@ void Knife::move(int x, int y, Graph* map) {
 }
 
 void Knife::update(Graph* map) {
-    if (currentPathIndex < path.size()) {
-        posx = path[currentPathIndex].GetX();
-        posy = path[currentPathIndex].GetY();
-        shape.setPosition(posx*shape.getSize().x, posy*shape.getSize().y);
-        currentPathIndex++;
-        std::cout << "Knife position: " << posx << ", " << posy << std::endl;
+    if (clock.getElapsedTime().asSeconds() > 0.1f) {
+        if (currentPathIndex < path.size()) {
+            posx = path[currentPathIndex].GetX();
+            posy = path[currentPathIndex].GetY();
+            shape.setPosition(posx * 50.f, posy * 50.f);
+            currentPathIndex++;
+        }
+        clock.restart();
     }
+
+    std::cout << "Knife position: " << posx << ", " << posy << std::endl;
 }
+
 
 sf::RectangleShape Knife::getShape() {
     return shape;

@@ -1,11 +1,13 @@
-#include <vector>
-#include <unordered_map>
-
 #ifndef LABPRO_GRAPH_H
 #define LABPRO_GRAPH_H
 
+#include <vector>
+#include <unordered_map>
 #include "Node.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <ctime>
+#include <cstdlib>
 
 class Graph {
 public:
@@ -23,11 +25,16 @@ public:
     Node* getDown(Node* node) const;
 
     std::vector<Node*> getNodes() const;
-    void display();
+    void display(sf::RenderWindow& window);
+private:
+    void generateRandomNodes();
+
 private:
     int width;
     int height;
     std::vector<Node*> nodes;
+    sf::VertexArray vertices;
+
 
 };
 

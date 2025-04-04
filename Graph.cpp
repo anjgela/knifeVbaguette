@@ -3,17 +3,39 @@
 //
 
 #include "Graph.h"
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
 
 Graph::Graph() {
     width = sf::VideoMode::getDesktopMode().width / 50;
     height = sf::VideoMode::getDesktopMode().height / 50;
+    vertices.setPrimitiveType(sf::Quads);
+    vertices.resize(width*height*4);
+    std::srand(std::time(nullptr));
+    generateRandomNodes();
+}
+
+void Graph::generateRandomNodes() {
     nodes.resize(width * height);
     for (int y = 0; y < height; ++y) {
         for (int x = 0; x < width; ++x) {
             int n = x + y * width;
-            nodes[n] = new Node(TILE, x, y);    //ELEFANTE: WHEN RANDOM PLACEMENT OF OBSTACLES: CHANGING COST OF NODES
+            if (std::rand() % 100 < 12) {   //percentage of nodes which are obstacles
+                nodes[n] = new Node(OBSTACLE, x, y);
+            } else {
+                nodes[n] = new Node(TILE, x, y);
+            }
+
+            //vertex array
+            sf::Vertex* quad = &vertices[n*4];
+            quad[0] = sf::Vector2f(x*50.f, y*50.f);
+            quad[1] = sf::Vector2f((x+1)*50.f, y*50.f);
+            quad[2] = sf::Vector2f((x+1)*50.f, (y+1)*50.f);
+            quad[3] = sf::Vector2f(x*50.f, (y+1)*50.f);
+
+            sf::Color color = (nodes[n]->getID() == TILE) ? sf::Color::Blue : sf::Color(255, 165, 0);
+            quad[0].color = color;
+            quad[1].color = color;
+            quad[2].color = color;
+            quad[3].color = color;
         }
     }
     for (int y = 0; y < height; ++y) {
@@ -111,8 +133,6 @@ std::vector<Node*> Graph::getNodes() const {
     return nodes;
 }
 
-void Graph::display() {
-    for (auto node : nodes) {
-
-    }
+void Graph::display(sf::RenderWindow& window) {
+    window.draw(vertices);
 }

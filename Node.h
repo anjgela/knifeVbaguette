@@ -4,24 +4,24 @@
 #include <unordered_map>
 #include <SFML/Graphics.hpp>
 
-enum {TILE, OBSTACLE};
+enum NodeType {TILE, OBSTACLE};
 
 class Node {
 public:
-    Node(int id);
-    Node(int id, int x, int y);
+    Node(NodeType id);
+    Node(NodeType id, int x, int y);
 
     void setCost();
 
-    unsigned int getID();
-    int getX();
-    int getY();
-    float getCost();
+    NodeType getID() const;
+    int getX() const;
+    int getY() const;
+    float getCost() const;
     sf::RectangleShape getShape() const;
 
     std::unordered_map<Node*, float> neighbours; //adjacency list for neighbours paired with the cost of the edge to reach them
 private:
-    unsigned int ID;
+    NodeType ID;
     int x;
     int y;
     float cost; //calculated by A* algorithm (f=g+h)

@@ -6,6 +6,12 @@
 #include "Knife.h"
 #include "Graph.h"
 
+enum gameStatus {
+    PLAYING,
+    GAME_OVER,
+    WIN
+};
+
 class Match {
 public:
     Match();
@@ -20,6 +26,7 @@ private:
     void togglePause();
     void pollEvents();
     void pollPauseEvents();
+    void pollEndEvents();
     void initVariables();
     void initWindow();
     void updateMousePosWindow();
@@ -34,14 +41,32 @@ private:
     Knife* knife;
     Graph* map;
 
+    unsigned int status = PLAYING;
+    unsigned int checkGameStatus();
+    sf::Font font;
+    //pause
     bool paused = false;
 
-    sf::Font font;
     sf::RectangleShape pauseVeil;
     sf::RectangleShape resumeShape;
     sf::Text resumeText;
+
+    //game over
+    sf::RectangleShape gameOverShape;
+    sf::Text gameOverText;
+
+    //win
+    sf::RectangleShape winShape;
+    sf::Text winText;
+
     sf::RectangleShape exitShape;
     sf::Text exitText;
+    sf::RectangleShape playAgainShape;
+    sf::Text playAgainText;
+
+    //timer
+    sf::Clock timer;
+    sf::Time playingTime;
 };
 
 

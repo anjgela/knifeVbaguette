@@ -11,32 +11,60 @@ Baguette::~Baguette() {
     delete enemy;
 }
 
+sf::RectangleShape Baguette::getShape() const {
+    return shape;
+}
+
+void Baguette::update(Graph* map) {
+    if (right) {
+        moveRight(map);
+    }
+    if (left) {
+        moveLeft(map);
+    }
+    if (up) {
+        moveUp(map);
+    }
+    if (down) {
+        moveDown(map);
+    }
+}
+
+//private methods
 void Baguette::moveRight(Graph* map) {
-    if (map->getNode(posx+1, posy)->getID() == TILE) {
-        posx += 1;
-        shape.setPosition(posx*50.f, shape.getPosition().y);
-        enemy->move(posx, posy, map);
+    if (map->isWalkable(getPosX()+1, getPosY())) {
+        if (map->getNode(posx+1, posy)->getID() == TILE) {
+            posx += 1;
+            shape.move(50.f, 0);
+            enemy->move(posx, posy, map);
+        }
     }
 
 }
 void Baguette::moveLeft(Graph* map) {
-    if (map->getNode(posx - 1, posy)->getID() == TILE) {
-        posx -= 1;
-        shape.setPosition(posx*50.f, shape.getPosition().y);
-        enemy->move(posx, posy, map);
+    if (map->isWalkable(getPosX()-1, getPosY())) {
+        if (map->getNode(posx - 1, posy)->getID() == TILE) {
+            posx -= 1;
+            shape.move(-50.f, 0);
+            enemy->move(posx, posy, map);
+        }
     }
 }
 void Baguette::moveUp(Graph* map) {
-    if (map->getNode(posx, posy-1)->getID() == TILE) {
-        posy -= 1;
-        shape.setPosition(shape.getPosition().x, posy*50.f);
-        enemy->move(posx, posy, map);
+    if (map->isWalkable(getPosX(), getPosY()-1)) {
+        if (map->getNode(posx, posy-1)->getID() == TILE) {
+            posy -= 1;
+            shape.move(0, -50.f);
+            enemy->move(posx, posy, map);
+        }
     }
 }
 void Baguette::moveDown(Graph* map) {
-    if (map->getNode(posx, posy + 1)->getID() == TILE) {
-        posy += 1;
-        shape.setPosition(shape.getPosition().x, posy*50.f);
-        enemy->move(posx, posy, map);
+    if (map->isWalkable(getPosX(), getPosY()+1)) {
+        if (map->getNode(posx, posy + 1)->getID() == TILE) {
+            posy += 1;
+            shape.move(0, 50.f);
+            enemy->move(posx, posy, map);
+        }
     }
 }

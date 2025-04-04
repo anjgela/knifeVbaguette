@@ -13,18 +13,23 @@ public:
     Baguette(Knife* knife);
     virtual ~Baguette() override;
 
+    sf::RectangleShape getShape() const;
+    void update(Graph* map);
+private:
     void moveRight(Graph* map);
     void moveLeft(Graph* map);
     void moveUp(Graph* map);
     void moveDown(Graph* map);
 
-
-    sf::RectangleShape getShape() const {
-        return shape;
-    }
+public:
+    bool right = false;
+    bool left  = false;
+    bool up = false;
+    bool down = false;
 private:
     void moveAux(Graph* map);
     Knife* enemy;
+
 };
 
 

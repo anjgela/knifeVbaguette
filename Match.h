@@ -5,6 +5,7 @@
 #include "Baguette.h"
 #include "Knife.h"
 #include "Graph.h"
+#include <sstream>
 
 enum gameStatus {
     PLAYING,
@@ -67,6 +68,7 @@ private:
     //timer
     sf::Clock timer;
     sf::Time playingTime;
+    sf::Text timerText;
 };
 
 

@@ -12,23 +12,22 @@ public:
     Character() = default;
     virtual ~Character() = default;
 
-    /*    CHANGE MOVE: ARGUMENTS ONLY MAP:
-     * BAGUETTE GETS DESTINATION FROM KEYBORD
-     * KNIFE GETS DESTINATION FROM BAGUETTES POSITION
-     */
-
-
     int getPosX();
     int getPosY();
 
     void setPosX(int x);
     void setPosY(int y);
 
+    bool right = false;
+    bool left = false;
+    bool up = false;
+    bool down = false;
+
 protected:
     int posx = 0;
     int posy = 0;
     sf::RectangleShape shape;
-
+    sf::Texture texture;
 };
 
 

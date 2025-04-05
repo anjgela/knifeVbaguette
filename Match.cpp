@@ -16,7 +16,10 @@ Match::~Match() {
 void Match::update() {
     if (!paused) {
         sf::Time elapsed = playingTime + timer.getElapsedTime();
+        std::stringstream ss;
         if (checkGameStatus() == PLAYING) {
+            ss << "TIME: " << static_cast<int>(elapsed.asSeconds());
+            timerText.setString(ss.str());
             if (elapsed.asSeconds() > 60) {
                 timer.restart();
                 playingTime = sf::Time::Zero;
@@ -56,6 +59,7 @@ void Match::render() {
         //draw characters
         window->draw(baguette->getShape());
         window->draw(knife->getShape());
+        window->draw(timerText);
         if (paused) {
             window->draw(pauseVeil);
             window->draw(resumeShape);
@@ -121,7 +125,7 @@ void Match::pollEvents() {
             }
             if (ev.key.code == (sf::Keyboard::Up))
                 if ((baguette->getPosY() - 1) * 50.f >= 0) {
-                    baguette->up = true;
+                    baguette->up= true;
                 }
             if (ev.key.code == (sf::Keyboard::W)) {
                 if ((baguette->getPosY() - 1) * 50.f >= 0) {
@@ -130,7 +134,7 @@ void Match::pollEvents() {
             }
             if (ev.key.code == (sf::Keyboard::Down)) {
                 if ((baguette->getPosY() + 1) * 50.f <= window->getSize().y - 50.f) {
-                    baguette->down = true;
+                    baguette->down= true;
                 }
             }
             if (ev.key.code == (sf::Keyboard::S)) {
@@ -242,7 +246,6 @@ void Match::initVariables() {
     map = new Graph();
     std::cout << "MAP DIMENSIONS: " << map->getHeight() << ", " << map->getWidth() << std::endl;
     std::cout << "NODES: " << map->getNodes().size() << std::endl;
-    timer.restart();
 
     font.loadFromFile("Hot Food.otf");
     if (!font.loadFromFile("Hot Food.otf")) {
@@ -288,6 +291,14 @@ void Match::initVariables() {
     exitText = sf::Text("EXIT GAME", font, 25);
     exitText.setFillColor(sf::Color::Black);
     exitText.setPosition(exitShape.getPosition().x + 50.f, exitShape.getPosition().y + 50.f);
+
+    //clock
+    timer.restart();
+    timerText.setFont(font);
+    timerText.setCharacterSize(24);
+    timerText.setPosition(10.f,10.f);
+    timerText.setFillColor(sf::Color::White);
+
 }
 
 void Match::initWindow() {

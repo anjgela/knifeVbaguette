@@ -18,7 +18,7 @@ void Graph::generateRandomNodes() {
     for (int y = 0; y < height; ++y) {
         for (int x = 0; x < width; ++x) {
             int n = x + y * width;
-            if (std::rand() % 100 < 12) {   //percentage of nodes which are obstacles
+            if (std::rand() % 100 < 15) {   //percentage of nodes which are obstacles
                 nodes[n] = new Node(OBSTACLE, x, y);
             } else {
                 nodes[n] = new Node(TILE, x, y);

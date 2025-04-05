@@ -2,9 +2,13 @@
 Knife::Knife() : currentPathIndex(0) {
     posx = 0;
     posy = 0;
+    //texture.loadFromFile("Kplaying.png");
+    if (!texture.loadFromFile("KplayingR.png")) {
+        std::cerr << "Error loading texture" << std::endl;
+    }
+    shape.setTexture(&texture);
     shape.setSize(sf::Vector2f(50.f,50.f)); //every node consists of 50 pixels
     shape.setPosition(posx*shape.getSize().x, posy*shape.getSize().y);  //top left corner of the object
-    shape.setFillColor(sf::Color::Red);
     clock.restart();
 }
 Knife::~Knife() {
@@ -43,8 +47,23 @@ void Knife::move(int x, int y, Graph* map) {
 void Knife::update(Graph* map) {
     if (clock.getElapsedTime().asSeconds() > 0.1f) {
         if (currentPathIndex < path.size()) {
-            posx = path[currentPathIndex].GetX();
+            int newPosx = path[currentPathIndex].GetX();
+            if (newPosx > posx) {
+                right = true;
+                left = false;
+                if (!texture.loadFromFile("KplayingR.png")) {
+                    std::cerr << "Error loading texture" << std::endl;
+                }
+            } else if (newPosx < posx) {
+                left = true;
+                right= false;
+                if (!texture.loadFromFile("KplayingL.png")) {
+                    std::cerr <<"Error loading texture" << std::endl;
+                }
+            }
+            posx = newPosx;
             posy = path[currentPathIndex].GetY();
+            shape.setTexture(&texture);
             shape.setPosition(posx * 50.f, posy * 50.f);
             currentPathIndex++;
         }

@@ -20,16 +20,13 @@ private:
     void moveLeft(Graph* map);
     void moveUp(Graph* map);
     void moveDown(Graph* map);
-
 public:
-    bool right = false;
-    bool left  = false;
-    bool up = false;
-    bool down = false;
+
 private:
     void moveAux(Graph* map);
     Knife* enemy;
 
+    sf::Clock clock;
 };
 
 

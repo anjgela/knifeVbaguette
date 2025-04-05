@@ -2,10 +2,12 @@
 Baguette::Baguette(Knife* knife) : enemy(knife) {
     posx = 7;
     posy = 5;
+    if (!texture.loadFromFile("BplayingR.png")) {
+        std::cerr << "Error loading texture" << std::endl;
+    }
+    shape.setTexture(&texture);
     shape.setSize(sf::Vector2f(50.f, 50.f));    //every node consists of 50 pixels
     shape.setPosition(posx*shape.getSize().x, posy*shape.getSize().y);  //top left corner of the object
-
-    shape.setFillColor(sf::Color::Green);
 }
 Baguette::~Baguette() {
     delete enemy;
@@ -16,17 +18,28 @@ sf::RectangleShape Baguette::getShape() const {
 }
 
 void Baguette::update(Graph* map) {
-    if (right) {
-        moveRight(map);
-    }
-    if (left) {
-        moveLeft(map);
-    }
-    if (up) {
-        moveUp(map);
-    }
-    if (down) {
-        moveDown(map);
+    if (clock.getElapsedTime().asSeconds() > 0.05f) {
+        if (right) {
+            if (!texture.loadFromFile("BplayingR.png")) {
+                std::cerr << "Error loading texture" << std::endl;
+            }
+            shape.setTexture(&texture);
+            moveRight(map);
+        }
+        if (left) {
+            if (!texture.loadFromFile("BplayingL.png")) {
+                std::cerr << "Error loading texture" << std::endl;
+            }
+            shape.setTexture(&texture);
+            moveLeft(map);
+        }
+        if (up) {
+            moveUp(map);
+        }
+        if (down) {
+            moveDown(map);
+        }
+        clock.restart();
     }
 }
 

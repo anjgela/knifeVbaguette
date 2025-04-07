@@ -13,37 +13,17 @@ public:
     MapSearch() : x(0), y(0), graph(nullptr) {}
     MapSearch(int x, int y, Graph* graph) : x(x), y(y), graph(graph) {}
 
-    float GoalDistanceEstimate(const MapSearch &nodeGoal) const {
-        return static_cast<float>( abs(x - nodeGoal.x) + abs(y - nodeGoal.y) );
-    }
+    float GoalDistanceEstimate(const MapSearch &nodeGoal) const;
+    size_t hash() const;
 
-    bool IsGoal(MapSearch &nodeGoal) {
-        return (x==nodeGoal.x and y==nodeGoal.y);
-    }
+    bool IsGoal(MapSearch &nodeGoal);
+    bool IsSameState(const MapSearch &node) const;
 
-    bool GetSuccessors(AStarSearch<MapSearch>* astarsearch, MapSearch* parent); //ELEFANTE: stlastar changed to AStarSearch
+    int getX() const;
+    int getY() const;
+    float GetCost(const MapSearch &successor) const;
+    bool getSuccessors(AStarSearch<MapSearch>* astarsearch, MapSearch* parent);
 
-    float GetCost(const MapSearch &successor) const {
-        return 1.0f;
-    }
-
-    bool IsSameState (const MapSearch &node) const {
-        return (x == node.x && y == node.y);
-    }
-
-    void PrintNodeInfo() const {
-        std::cout << "node (" << x << ", " << y << ")" << std::endl;
-    }
-
-    size_t Hash() const {   //unique value based on x, y
-        return static_cast<size_t>(x + y * graph->getWidth());
-    }
-    int GetX() const {
-        return x;
-    }
-    int GetY() const {
-        return y;
-    }
 private:
     int x;
     int y;

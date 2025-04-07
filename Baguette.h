@@ -13,19 +13,16 @@ public:
     Baguette(Knife* knife);
     virtual ~Baguette() override;
 
-    sf::RectangleShape getShape() const;
-    void update(Graph* map);
+    void update(Graph* map) override;
+
 private:
     void moveRight(Graph* map);
     void moveLeft(Graph* map);
     void moveUp(Graph* map);
     void moveDown(Graph* map);
-public:
 
 private:
-    void moveAux(Graph* map);
     Knife* enemy;
-
     sf::Clock clock;
 };
 

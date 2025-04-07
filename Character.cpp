@@ -10,6 +10,9 @@ int Character::getPosX() {
 int Character::getPosY() {
     return posy;
 }
+sf::RectangleShape Character::getShape() const {
+    return shape;
+}
 
 void Character::setPosX(int x) {
     posx = x;

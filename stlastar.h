@@ -216,7 +216,7 @@ public: // methods
         m_OpenList.pop_back();
 
         // Check for the goal, once we pop that we're done
-        if( n->m_UserState.IsGoal( m_Goal->m_UserState ) )
+        if(n->m_UserState.IsGoal(m_Goal->m_UserState) )
         {
             // The user is going to use the Goal Node he passed in
             // so copy the parent pointer of n
@@ -263,7 +263,7 @@ public: // methods
 
             // User provides this functions and uses AddSuccessor to add each successor of
             // node 'n' to m_Successors
-            bool ret = n->m_UserState.GetSuccessors( this, n->parent ? &n->parent->m_UserState : NULL );
+            bool ret = n->m_UserState.getSuccessors(this, n->parent ? &n->parent->m_UserState : NULL);
 
             if( !ret )
             {
@@ -778,7 +778,7 @@ private: // data
     // Closed is an unordered_set
     struct NodeHash {
         size_t operator() (Node* const& n) const {
-            return n->m_UserState.Hash();   //ELEFANTE: Hash() changed into Hash
+            return n->m_UserState.hash();   //ELEFANTE: Hash() changed into hash
         }
     };
     struct NodeEqual {

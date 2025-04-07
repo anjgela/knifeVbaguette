@@ -1,7 +1,3 @@
-//
-// Created by Utente on 24/02/2025.
-//
-
 #include "Graph.h"
 
 Graph::Graph() {

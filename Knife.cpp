@@ -2,7 +2,6 @@
 Knife::Knife() : currentPathIndex(0) {
     posx = 0;
     posy = 0;
-    //texture.loadFromFile("Kplaying.png");
     if (!texture.loadFromFile("KplayingR.png")) {
         std::cerr << "Error loading texture" << std::endl;
     }
@@ -18,8 +17,8 @@ void Knife::move(int x, int y, Graph* map) {
     MapSearch goal(x,y, map);  //goal
     path.clear();
 
-    std::cout << "START: " <<start.GetX() << ", " << start.GetY() << std::endl;
-    std::cout << "GOAL: " << goal.GetX() << ", " << goal.GetY() << std::endl;
+    std::cout << "START: " << start.getX() << ", " << start.getY() << std::endl;
+    std::cout << "GOAL: " << goal.getX() << ", " << goal.getY() << std::endl;
 
     AStarSearch<MapSearch> astarsearch;                     //A* algorithm to find path
     astarsearch.SetStartAndGoalStates(start, goal);
@@ -30,16 +29,14 @@ void Knife::move(int x, int y, Graph* map) {
 
     if (searchState == AStarSearch<MapSearch>::SEARCH_STATE_SUCCEEDED) {
         MapSearch* node = astarsearch.GetSolutionStart();
-        std::cout << "CURRENT NODE : " << node->GetX() << ", " << node->GetY() << std::endl;
         while (node != nullptr) {
             path.push_back(*node);
             node = astarsearch.GetSolutionNext();
         }
-        std::cout << "Path found with " << path.size() << " nodes." << std::endl;
     } else {
-        std::cout << "path not found" << std::endl;
+        std::cerr << "Path not found" << std::endl;
     }
-    astarsearch.FreeSolutionNodes();    //free allocated memory for the solution nodes
+    astarsearch.FreeSolutionNodes();
 
     currentPathIndex = 0;
 }
@@ -47,7 +44,7 @@ void Knife::move(int x, int y, Graph* map) {
 void Knife::update(Graph* map) {
     if (clock.getElapsedTime().asSeconds() > 0.1f) {
         if (currentPathIndex < path.size()) {
-            int newPosx = path[currentPathIndex].GetX();
+            int newPosx = path[currentPathIndex].getX();
             if (newPosx > posx) {
                 right = true;
                 left = false;
@@ -62,15 +59,13 @@ void Knife::update(Graph* map) {
                 }
             }
             posx = newPosx;
-            posy = path[currentPathIndex].GetY();
+            posy = path[currentPathIndex].getY();
             shape.setTexture(&texture);
             shape.setPosition(posx * 50.f, posy * 50.f);
             currentPathIndex++;
         }
         clock.restart();
     }
-
-    std::cout << "Knife position: " << posx << ", " << posy << std::endl;
 }
 
 

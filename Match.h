@@ -53,12 +53,18 @@ private:
     sf::Text resumeText;
 
     //game over
-    sf::RectangleShape gameOverShape;
     sf::Text gameOverText;
+    sf::RectangleShape gameOverKnifeShape;
+    sf::Texture gameOverKnifeTexture;
+    sf::RectangleShape gameOverBaguetteShape;
+    sf::Texture gameOverBaguetteTexture;
 
     //win
-    sf::RectangleShape winShape;
     sf::Text winText;
+    sf::RectangleShape winKnifeShape;
+    sf::Texture winKnifeTexture;
+    sf::RectangleShape winBaguetteShape;
+    sf::Texture winBaguetteTexture;
 
     sf::RectangleShape exitShape;
     sf::Text exitText;
@@ -68,6 +74,7 @@ private:
     //timer
     sf::Clock timer;
     sf::Time playingTime;
+    sf::RectangleShape timerShape;
     sf::Text timerText;
 };
 

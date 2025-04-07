@@ -70,24 +70,24 @@ void Menu::initVariables() {
     }
 
     //title
-    titleShape.setSize(sf::Vector2f(700.f,200.f));
-    titleShape.setPosition((videoMode.width/2) - (titleShape.getSize().x/2), videoMode.height/5);
+    titleShape.setSize(sf::Vector2f(770.f,200.f));
+    titleShape.setPosition((videoMode.width/2) - (titleShape.getSize().x/2), videoMode.height/7);
     titleShape.setFillColor(sf::Color::Red);
 
-    titleText = sf::Text("KNIFE V BAGUETTE", font, 90);
+    titleText = sf::Text("KNIFE V BAGUETTE", font, 120);
     titleText.setFillColor(sf::Color::White);
     titleText.setPosition(titleShape.getPosition().x + titleShape.getSize().x/2 - titleText.getLocalBounds().width/2,
-                          titleShape.getPosition().y + titleShape.getSize().y/2 - titleText.getLocalBounds().height/2);
+                          titleShape.getPosition().y + titleShape.getSize().y/3 - titleText.getLocalBounds().height/2);
 
     //button
     playShape.setSize(sf::Vector2f(400.f, 200.f));
     playShape.setPosition((videoMode.width/2) - (playShape.getSize().x/2), videoMode.height*3/5);
-    playShape.setFillColor(sf::Color::Magenta);
+    playShape.setFillColor(sf::Color::Green);
 
     playText = sf::Text("PLAY", font, 150);
     playText.setFillColor(sf::Color::White);
     playText.setPosition(playShape.getPosition().x + playShape.getSize().x/2 - playText.getLocalBounds().width/2,
-                         playShape.getPosition().y + playShape.getSize().y/2 - playText.getLocalBounds().height/2);
+                         playShape.getPosition().y + playShape.getSize().y/3 - playText.getLocalBounds().height/2);
 
     //game window
     game = nullptr;

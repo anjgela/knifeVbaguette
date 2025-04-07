@@ -14,18 +14,22 @@ public:
 
     int getPosX();
     int getPosY();
+    sf::RectangleShape getShape() const;
 
     void setPosX(int x);
     void setPosY(int y);
+
+    virtual void update(Graph* map) = 0;
 
     bool right = false;
     bool left = false;
     bool up = false;
     bool down = false;
 
+
 protected:
-    int posx = 0;
-    int posy = 0;
+    int posx;
+    int posy;
     sf::RectangleShape shape;
     sf::Texture texture;
 };

@@ -26,6 +26,7 @@ public:
 
     std::vector<Node*> getNodes() const;
     void display(sf::RenderWindow& window);
+
 private:
     void generateRandomNodes();
 

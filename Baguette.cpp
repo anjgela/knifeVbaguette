@@ -13,9 +13,6 @@ Baguette::~Baguette() {
     delete enemy;
 }
 
-sf::RectangleShape Baguette::getShape() const {
-    return shape;
-}
 
 void Baguette::update(Graph* map) {
     if (clock.getElapsedTime().asSeconds() > 0.05f) {

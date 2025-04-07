@@ -10,7 +10,6 @@ class Node {
 public:
     Node(NodeType id);
     Node(NodeType id, int x, int y);
-
     void setCost();
 
     NodeType getID() const;
@@ -24,7 +23,7 @@ private:
     NodeType ID;
     int x;
     int y;
-    float cost; //calculated by A* algorithm (f=g+h)
+    float cost;
 
     sf::RectangleShape shape;
 

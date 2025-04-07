@@ -14,7 +14,7 @@ public:
     ~Knife() override;
 
     void move(int x, int y, Graph* map);
-    void update(Graph* map);
+    void update(Graph* map) override;
 
     sf::RectangleShape getShape();
 

@@ -17,6 +17,10 @@ void Node::setCost() {
     }
 }
 
+void Node::setID(NodeType id) {
+    ID = id;
+}
+
 NodeType Node::getID() const {
     return ID;
 }

@@ -18,13 +18,18 @@ public:
     Match();
     virtual ~Match();
 
+    void setKnifePosition(float x, float y);
+    void setBaguettePosition(float x, float y);
+
     void update();
     void render();
     bool isWindowOpen() const;
-
-private:
+    gameStatus checkGameStatus();
+    sf::Time getPlayingTime() const;
     bool isPaused() const;
     void togglePause();
+
+private:
     void pollEvents();
     void pollPauseEvents();
     void pollEndEvents();
@@ -42,8 +47,7 @@ private:
     Knife* knife;
     Graph* map;
 
-    unsigned int status = PLAYING;
-    unsigned int checkGameStatus();
+    gameStatus status = PLAYING;
     sf::Font font;
     //pause
     bool paused = false;

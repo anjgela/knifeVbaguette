@@ -13,6 +13,14 @@ Match::~Match() {
     delete map;
 }
 
+void Match::setKnifePosition(float x, float y) {
+    knife->getShape().setPosition(x, y);
+}
+
+void Match::setBaguettePosition(float x, float y) {
+    baguette->getShape().setPosition(x, y);
+}
+
 void Match::update() {
     if (!paused) {
         sf::Time elapsed = playingTime + timer.getElapsedTime();
@@ -20,7 +28,7 @@ void Match::update() {
         if (checkGameStatus() == PLAYING) {
             ss << "TIME: " << static_cast<int>(elapsed.asSeconds());
             timerText.setString(ss.str());
-            if (elapsed.asSeconds() > 60) {
+            if (elapsed.asSeconds() > 45) {
                 timer.restart();
                 playingTime = sf::Time::Zero;
                 status = WIN;
@@ -39,13 +47,13 @@ void Match::update() {
 
 void Match::render() {
     if (checkGameStatus() == GAME_OVER) {
-        window->clear(sf::Color::Red);
+        window->clear(sf::Color(217, 74, 74));
         //window->draw(gameOverShape);
         window->draw(gameOverText);
         window->draw(gameOverKnifeShape);
         window->draw(gameOverBaguetteShape);
     } else if (checkGameStatus() == WIN) {
-        window->clear(sf::Color::Green);
+        window->clear(sf::Color(94, 140, 47));
         //window->draw(winShape);
         window->draw(winText);
         window->draw(winKnifeShape);
@@ -57,7 +65,7 @@ void Match::render() {
         window->draw(exitShape);
         window->draw(exitText);
     } else {
-        window->clear(sf::Color::Black);
+        window->clear(sf::Color(181, 225, 245));
         //draw map
         map->display(*window);
         //draw characters
@@ -80,7 +88,17 @@ bool Match::isWindowOpen() const {
     return window->isOpen();
 }
 
-//private
+gameStatus Match::checkGameStatus() {
+    if (knife->getShape().getPosition() == baguette->getShape().getPosition()) {
+        status = GAME_OVER;
+    }
+    return status;
+}
+
+sf::Time Match::getPlayingTime() const {
+    return playingTime;
+}
+
 bool Match::isPaused() const {
     return paused;
 }
@@ -94,6 +112,7 @@ void Match::togglePause() {
     paused = !paused;
 }
 
+//private
 void Match::pollEvents() {
     window->pollEvent(ev);
 
@@ -260,16 +279,16 @@ void Match::initVariables() {
 
     resumeShape.setSize(sf::Vector2f(300.f, 150.f));
     resumeShape.setPosition(250.f, 200.f);
-    resumeShape.setFillColor(sf::Color::Green);
+    resumeShape.setFillColor(sf::Color(146,210,88));
     resumeShape.setOutlineThickness(5.f);
     resumeShape.setOutlineColor(sf::Color::Black);
-    resumeText = sf::Text("RESUME GAME", font, 25);
+    resumeText = sf::Text("RESUME GAME", font, 40);
     resumeText.setFillColor(sf::Color::Black);
     resumeText.setPosition(resumeShape.getPosition().x + 50.f, resumeShape.getPosition().y + 50.f);
 
     //game over variables
     gameOverText = sf::Text("GAME OVER", font, 150);
-    gameOverText.setFillColor(sf::Color::Black);
+    gameOverText.setFillColor(sf::Color(250,150,130));
     gameOverText.setPosition(60.f, 50.f);
     gameOverKnifeShape.setSize(sf::Vector2f(300.f, 500.f));
     gameOverKnifeShape.setPosition(1000.f,150.f);
@@ -286,7 +305,7 @@ void Match::initVariables() {
 
     //win variables
     winText = sf::Text("YOU WIN", font, 150);
-    winText.setFillColor(sf::Color::Black);
+    winText.setFillColor(sf::Color(146,210,88));
     winText.setPosition(60.f, 50.f);
     winKnifeShape.setSize(sf::Vector2f(300.f, 500.f));
     winKnifeShape.setPosition(1000.f,150.f);
@@ -303,19 +322,19 @@ void Match::initVariables() {
 
     playAgainShape.setSize(sf::Vector2f(300.f, 150.f));
     playAgainShape.setPosition(250.f, 300.f);
-    playAgainShape.setFillColor(sf::Color::Green);
+    playAgainShape.setFillColor(sf::Color(146,210,88));
     playAgainShape.setOutlineThickness(5.f);
     playAgainShape.setOutlineColor(sf::Color::Black);
-    playAgainText = sf::Text("PLAY AGAIN", font, 25);
+    playAgainText = sf::Text("PLAY AGAIN", font, 40);
     playAgainText.setFillColor(sf::Color::Black);
     playAgainText.setPosition(playAgainShape.getPosition().x + 50.f, playAgainShape.getPosition().y + 50.f);
 
     exitShape.setSize(sf::Vector2f(300.f, 150.f));
     exitShape.setPosition(250.f, 500.f);
-    exitShape.setFillColor(sf::Color::Red);
+    exitShape.setFillColor(sf::Color(250,150,130));
     exitShape.setOutlineThickness(5.f);
     exitShape.setOutlineColor(sf::Color::Black);
-    exitText = sf::Text("EXIT GAME", font, 25);
+    exitText = sf::Text("EXIT GAME", font, 40);
     exitText.setFillColor(sf::Color::Black);
     exitText.setPosition(exitShape.getPosition().x + 50.f, exitShape.getPosition().y + 50.f);
 
@@ -343,9 +362,3 @@ void Match::updateMousePosWindow() {
     mousePosWindow = sf::Mouse::getPosition(*window);
 }
 
-unsigned int Match::checkGameStatus() {
-    if (knife->getShape().getPosition() == baguette->getShape().getPosition()) {
-        status = GAME_OVER;
-    }
-    return status;
-}

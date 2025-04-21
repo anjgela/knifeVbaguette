@@ -27,7 +27,7 @@ void Graph::generateRandomNodes() {
             quad[2] = sf::Vector2f((x+1)*50.f, (y+1)*50.f);
             quad[3] = sf::Vector2f(x*50.f, (y+1)*50.f);
 
-            sf::Color color = (nodes[n]->getID() == TILE) ? sf::Color::Blue : sf::Color(255, 165, 0);
+            sf::Color color = (nodes[n]->getID() == TILE) ? sf::Color(181, 225, 245) : sf::Color(91,91,91);
             quad[0].color = color;
             quad[1].color = color;
             quad[2].color = color;

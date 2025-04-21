@@ -11,6 +11,7 @@ public:
     Node(NodeType id);
     Node(NodeType id, int x, int y);
     void setCost();
+    void setID(NodeType id);
 
     NodeType getID() const;
     int getX() const;

@@ -64,7 +64,6 @@ void Menu::initWindow() {
 }
 void Menu::initVariables() {
     //font
-    font.loadFromFile("Hot Food.otf");
     if (!font.loadFromFile("Hot Food.otf")) {
         std::cerr << "Error loading font" << std::endl;
     }
@@ -72,7 +71,7 @@ void Menu::initVariables() {
     //title
     titleShape.setSize(sf::Vector2f(770.f,200.f));
     titleShape.setPosition((videoMode.width/2) - (titleShape.getSize().x/2), videoMode.height/7);
-    titleShape.setFillColor(sf::Color::Red);
+    titleShape.setFillColor(sf::Color(250,150,130));
 
     titleText = sf::Text("KNIFE V BAGUETTE", font, 120);
     titleText.setFillColor(sf::Color::White);
@@ -82,7 +81,7 @@ void Menu::initVariables() {
     //button
     playShape.setSize(sf::Vector2f(400.f, 200.f));
     playShape.setPosition((videoMode.width/2) - (playShape.getSize().x/2), videoMode.height*3/5);
-    playShape.setFillColor(sf::Color::Green);
+    playShape.setFillColor(sf::Color(146,210,88));
 
     playText = sf::Text("PLAY", font, 150);
     playText.setFillColor(sf::Color::White);

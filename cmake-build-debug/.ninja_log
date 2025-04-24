@@ -67,3 +67,5 @@
 2761	11612	7672189237479346	test/runAllTests.exe	c38da626ab072c5d
 15	3364	7672189824130466	test/CMakeFiles/runAllTests.dir/BaguetteTest.cpp.obj	71932b6e9dfa6d63
 3366	12148	7672189857636475	test/runAllTests.exe	c38da626ab072c5d
+12	3861	7672193137661540	CMakeFiles/labpro.dir/main.cpp.obj	e0ffc2f94a2400c6
+3862	6216	7672193176162051	labpro.exe	f2da199f1d184ed2

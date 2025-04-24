@@ -2,11 +2,8 @@
 #include <iostream>
 //public
 Match::Match() {
-    std::cout << "to be initialised" << std::endl;
     Match::initVariables();
-    std::cout << "variables initialised" << std::endl;
     Match::initWindow();
-    std::cout << "window initialised" << std::endl;
 }
 
 Match::~Match() {

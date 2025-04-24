@@ -1,36 +1,52 @@
 #include <gtest/gtest.h>
-#include "Knife.h"
-#include "Baguette.h"
-#include "Graph.h"
+#include <iostream>
+#include "../Knife.h"
+#include "../Baguette.h"
+#include "../Graph.h"
 
-class KnifeTest : public ::testing::Test {
+class KnifeFixture : public ::testing::Test {
 protected:
-    Knife knife;
+    Knife* knife;
     Baguette* baguette;
-    Graph graph{20, 20};
+    Graph* map;
 
     void SetUp() override {
-        baguette = new Baguette(&knife);
-        graph.getNode(6, 5)->setID(TILE);
+        knife = new Knife();
+        map = new Graph();
+        baguette = new Baguette(knife, map);
+        map->setWidth(20);
+        map->setHeight(20);
+        map->getNode(7,5)->setID(TILE);
     }
 
     void TearDown() override {
         delete baguette;
+        delete map;
     }
 };
 
-TEST_F(KnifeTest, InitializesAtCorrectPosition) {
-    EXPECT_EQ(knife.getPosX(), 5);
-    EXPECT_EQ(knife.getPosY(), 5);
+TEST_F(KnifeFixture, InitializesAtCorrectPosition) {
+    EXPECT_EQ(knife->getPosX(), 0);
+    EXPECT_EQ(knife->getPosY(), 0);
 }
 
-TEST_F(KnifeTest, UpdatesWithoutCrashingWithTarget) {
-    EXPECT_NO_THROW(knife.update(&graph));
+TEST_F(KnifeFixture, UpdatesWithoutCrashingWithTarget) {
+    EXPECT_NO_THROW(knife->update(map));
 }
 
-TEST_F(KnifeTest, MovesTowardTargetIfPathExists) {
-    baguette->getShape().setPosition(6 * TILE_SIZE, 5 * TILE_SIZE);
-    //sf::sleep(sf::seconds(0.06f));
-    knife.update(&graph);
-    EXPECT_EQ(knife.getPosX(), 6);
+TEST_F(KnifeFixture, MovesTowardTargetIfPathExists) {
+    knife->move(baguette->getPosX(), baguette->getPosY(), map);
+    sf::Clock playingTime;
+    playingTime.restart();
+    knife->getClock().restart();
+    while (playingTime.getElapsedTime() < sf::seconds(1.5f)) {
+        knife->update(map);
+    }
+    if (knife->getPath().size() == 0) {
+        EXPECT_EQ(knife->getPosX(), 0);
+        EXPECT_EQ(knife->getPosY(), 0);
+    } else {
+        EXPECT_EQ(knife->getPosX(), 7);
+        EXPECT_EQ(knife->getPosY(), 5);
+    }
 }

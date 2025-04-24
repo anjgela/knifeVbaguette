@@ -17,9 +17,6 @@ void Knife::move(int x, int y, Graph* map) {
     MapSearch goal(x,y, map);  //goal
     path.clear();
 
-    std::cout << "START: " << start.getX() << ", " << start.getY() << std::endl;
-    std::cout << "GOAL: " << goal.getX() << ", " << goal.getY() << std::endl;
-
     AStarSearch<MapSearch> astarsearch;                     //A* algorithm to find path
     astarsearch.SetStartAndGoalStates(start, goal);
     unsigned int searchState;   //keeping track of search state
@@ -33,7 +30,7 @@ void Knife::move(int x, int y, Graph* map) {
             path.push_back(*node);
             node = astarsearch.GetSolutionNext();
         }
-    } else {
+    } else if (searchState == AStarSearch<MapSearch>::SEARCH_STATE_FAILED) {
         std::cerr << "Path not found" << std::endl;
     }
     astarsearch.FreeSolutionNodes();
@@ -68,7 +65,14 @@ void Knife::update(Graph* map) {
     }
 }
 
+std::vector<MapSearch> Knife::getPath() const {
+    return path;
+}
 
-sf::RectangleShape Knife::getShape() {
+sf::RectangleShape Knife::getShape() const {
     return shape;
+}
+
+sf::Clock Knife::getClock() const {
+    return clock;
 }

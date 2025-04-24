@@ -1,5 +1,5 @@
 #include "Baguette.h"
-Baguette::Baguette(Knife* knife) : enemy(knife) {
+Baguette::Baguette(Knife* knife, Graph* map) : enemy(knife) {
     posx = 7;
     posy = 5;
     if (!texture.loadFromFile("BplayingR.png")) {
@@ -8,6 +8,7 @@ Baguette::Baguette(Knife* knife) : enemy(knife) {
     shape.setTexture(&texture);
     shape.setSize(sf::Vector2f(50.f, 50.f));    //every node consists of 50 pixels
     shape.setPosition(posx*shape.getSize().x, posy*shape.getSize().y);  //top left corner of the object
+    enemy->move(posx, posy, map);
 }
 Baguette::~Baguette() {
     delete enemy;

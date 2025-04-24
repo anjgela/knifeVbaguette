@@ -1,9 +1,12 @@
 #include "Match.h"
-
+#include <iostream>
 //public
 Match::Match() {
+    std::cout << "to be initialised" << std::endl;
     Match::initVariables();
+    std::cout << "variables initialised" << std::endl;
     Match::initWindow();
+    std::cout << "window initialised" << std::endl;
 }
 
 Match::~Match() {
@@ -13,12 +16,12 @@ Match::~Match() {
     delete map;
 }
 
-void Match::setKnifePosition(float x, float y) {
-    knife->getShape().setPosition(x, y);
+Baguette* Match::getBaguette() const {
+    return baguette;
 }
 
-void Match::setBaguettePosition(float x, float y) {
-    baguette->getShape().setPosition(x, y);
+Knife* Match::getKnife() const {
+    return knife;
 }
 
 void Match::update() {
@@ -26,8 +29,11 @@ void Match::update() {
         sf::Time elapsed = playingTime + timer.getElapsedTime();
         std::stringstream ss;
         if (checkGameStatus() == PLAYING) {
-            ss << "TIME: " << static_cast<int>(elapsed.asSeconds());
+            ss << "TIME: " << static_cast<int>(45-elapsed.asSeconds());
             timerText.setString(ss.str());
+            if (elapsed.asSeconds() > 34) {
+                timerShape.setFillColor(sf::Color(255, 0, 0, 150));
+            }
             if (elapsed.asSeconds() > 45) {
                 timer.restart();
                 playingTime = sf::Time::Zero;
@@ -94,6 +100,9 @@ gameStatus Match::checkGameStatus() {
     }
     return status;
 }
+gameStatus Match::getGameStatus() const {
+    return status;
+}
 
 sf::Time Match::getPlayingTime() const {
     return playingTime;
@@ -112,6 +121,11 @@ void Match::togglePause() {
     paused = !paused;
 }
 
+
+void Match::fastForwardTimer(sf::Time dt) {
+    playingTime += dt;
+    //timer().restart();
+}
 //private
 void Match::pollEvents() {
     window->pollEvent(ev);
@@ -249,8 +263,8 @@ void Match::pollEndEvents() {
                 && mousePosWindow.y < (playAgainShape.getPosition().y + playAgainShape.getSize().y)) {
                     status = PLAYING;
                     knife = new Knife();
-                    baguette = new Baguette(knife);
                     map = new Graph();
+                    baguette = new Baguette(knife, map);
                     timer.restart();
                     break;
                 } else if (mousePosWindow.x > exitShape.getPosition().x
@@ -267,8 +281,8 @@ void Match::pollEndEvents() {
 
 void Match::initVariables() {
     knife = new Knife();
-    baguette = new Baguette(knife);
     map = new Graph();
+    baguette = new Baguette(knife, map);
 
     if (!font.loadFromFile("Hot Food.otf")) {
         std::cerr << "Error loading font" << std::endl;
@@ -361,4 +375,13 @@ void Match::initWindow() {
 void Match::updateMousePosWindow() {
     mousePosWindow = sf::Mouse::getPosition(*window);
 }
+
+void Match::setPlayingTime(const sf::Time &playingTime) {
+    Match::playingTime = playingTime;
+}
+
+const sf::Clock &Match::getTimer() const {
+    return timer;
+}
+
 

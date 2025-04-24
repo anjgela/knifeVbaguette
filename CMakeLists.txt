@@ -38,3 +38,4 @@ target_link_libraries(core sfml-system sfml-window sfml-graphics sfml-audio sfml
 add_executable(
         labpro main.cpp)
 target_link_libraries(labpro core)
+

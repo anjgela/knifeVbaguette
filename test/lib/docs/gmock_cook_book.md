@@ -1718,7 +1718,7 @@ brittle tests. For example, we may care about `A` occurring before both `B` and
 `C`, but aren't interested in the relative order of `B` and `C`. In this case,
 the test should reflect our real intent, instead of being overly constraining.
 
-gMock allows you to impose an arbitrary DAG (directed acyclic graph) on the
+gMock allows you to impose an arbitrary DAG (directed acyclic map) on the
 calls. One way to express the DAG is to use the
 [`After` clause](reference/mocking.md#EXPECT_CALL.After) of `EXPECT_CALL`.
 
@@ -1728,7 +1728,7 @@ more convenient when you have long chains of sequential calls, as it doesn't
 require you to come up with different names for the expectations in the chains.
 Here's how it works:
 
-If we view `EXPECT_CALL()` statements as nodes in a graph, and add an edge from
+If we view `EXPECT_CALL()` statements as nodes in a map, and add an edge from
 node A to node B wherever A must occur before B, we can get a DAG. We use the
 term "sequence" to mean a directed path in this DAG. Now, if we decompose the
 DAG into sequences, we just need to know which sequences each `EXPECT_CALL()`

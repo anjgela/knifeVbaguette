@@ -10,7 +10,7 @@
 class Baguette : public Character {
 public:
     Baguette() = default;
-    Baguette(Knife* knife);
+    Baguette(Knife* knife, Graph* map);
     virtual ~Baguette() override;
 
     void update(Graph* map) override;

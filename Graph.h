@@ -16,7 +16,9 @@ public:
 
     bool isWalkable(int x, int y) const;
     int getWidth() const;
+    void setWidth(int width);
     int getHeight() const;
+    void setHeight(int height);
 
     Node* getNode(int x, int y) const;
     Node* getLeft(Node* node) const;

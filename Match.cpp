@@ -28,6 +28,9 @@ void Match::update() {
         if (checkGameStatus() == PLAYING) {
             ss << "TIME: " << static_cast<int>(45-elapsed.asSeconds());
             timerText.setString(ss.str());
+            if (elapsed.asSeconds() < 35) {
+                timerShape.setFillColor(sf::Color(0, 0, 0, 150));
+            }
             if (elapsed.asSeconds() > 34) {
                 timerShape.setFillColor(sf::Color(255, 0, 0, 150));
             }

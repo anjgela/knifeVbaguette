@@ -1,10 +1,10 @@
 #include "Graph.h"
-
+#include <iostream>
 Graph::Graph() {
     width = sf::VideoMode::getDesktopMode().width / 50;
     height = sf::VideoMode::getDesktopMode().height / 50;
     vertices.setPrimitiveType(sf::Quads);
-    vertices.resize(width*height*4);
+    vertices.resize(width * height * 4);
     std::srand(std::time(nullptr));
     generateRandomNodes();
 }
@@ -14,14 +14,15 @@ void Graph::generateRandomNodes() {
     for (int y = 0; y < height; ++y) {
         for (int x = 0; x < width; ++x) {
             int n = x + y * width;
+            sf::Vertex* quad = &vertices[n*4]; //vertex associated with the node
+
             if (std::rand() % 100 < 15) {   //percentage of nodes which are obstacles
-                nodes[n] = new Node(OBSTACLE, x, y);
+                nodes[n] = new Node(OBSTACLE, x, y, quad);
             } else {
-                nodes[n] = new Node(TILE, x, y);
+                nodes[n] = new Node(TILE, x, y, quad);
             }
 
             //vertex array
-            sf::Vertex* quad = &vertices[n*4];
             quad[0] = sf::Vector2f(x*50.f, y*50.f);
             quad[1] = sf::Vector2f((x+1)*50.f, y*50.f);
             quad[2] = sf::Vector2f((x+1)*50.f, (y+1)*50.f);

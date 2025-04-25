@@ -76,3 +76,8 @@ sf::RectangleShape Knife::getShape() const {
 sf::Clock Knife::getClock() const {
     return clock;
 }
+
+bool Knife::pathFound() const {
+    std::cout << "path size: " << path.size() << std::endl;
+    return !path.empty();
+}

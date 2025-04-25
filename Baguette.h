@@ -14,6 +14,7 @@ public:
     virtual ~Baguette() override;
 
     void update(Graph* map) override;
+    void moveEnemy(Graph* map);
 
 private:
     void moveRight(Graph* map);

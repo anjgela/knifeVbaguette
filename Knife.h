@@ -19,6 +19,8 @@ public:
     sf::RectangleShape getShape() const;
     sf::Clock getClock() const;
 
+    bool pathFound() const;
+
 private:
     std::vector<MapSearch> path;
     size_t currentPathIndex = 0;

@@ -15,6 +15,7 @@ public:
     virtual ~Graph();
 
     bool isWalkable(int x, int y) const;
+
     int getWidth() const;
     void setWidth(int width);
     int getHeight() const;
@@ -28,6 +29,7 @@ public:
 
     std::vector<Node*> getNodes() const;
     void display(sf::RenderWindow& window);
+
 
 private:
     void generateRandomNodes();

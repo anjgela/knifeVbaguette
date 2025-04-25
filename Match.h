@@ -41,6 +41,8 @@ private:
     void initVariables();
     void initWindow();
     void updateMousePosWindow();
+    void keepKnifePathClear();
+    void keepBaguetteNodeTile();
 
 private:
     sf::RenderWindow* window;

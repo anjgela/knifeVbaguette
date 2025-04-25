@@ -1,4 +1,6 @@
 #include "Baguette.h"
+
+//public
 Baguette::Baguette(Knife* knife, Graph* map) : enemy(knife) {
     posx = 7;
     posy = 5;
@@ -39,6 +41,10 @@ void Baguette::update(Graph* map) {
         }
         clock.restart();
     }
+}
+
+void Baguette::moveEnemy(Graph* map) {
+    enemy->move(posx, posy, map);
 }
 
 //private methods

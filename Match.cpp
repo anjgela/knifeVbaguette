@@ -108,6 +108,14 @@ sf::Time Match::getPlayingTime() const {
     return playingTime;
 }
 
+void Match::setPlayingTime(const sf::Time &playingTime) {
+    Match::playingTime = playingTime;
+}
+
+const sf::Clock &Match::getTimer() const {
+    return timer;
+}
+
 bool Match::isPaused() const {
     return paused;
 }
@@ -121,11 +129,10 @@ void Match::togglePause() {
     paused = !paused;
 }
 
-
 void Match::fastForwardTimer(sf::Time dt) {
     playingTime += dt;
-    //timer().restart();
 }
+
 //private
 void Match::pollEvents() {
     window->pollEvent(ev);
@@ -265,6 +272,9 @@ void Match::pollEndEvents() {
                     knife = new Knife();
                     map = new Graph();
                     baguette = new Baguette(knife, map);
+                    keepBaguetteNodeTile();
+                    baguette->moveEnemy(map);
+                    keepKnifePathClear();
                     timer.restart();
                     break;
                 } else if (mousePosWindow.x > exitShape.getPosition().x
@@ -283,6 +293,8 @@ void Match::initVariables() {
     knife = new Knife();
     map = new Graph();
     baguette = new Baguette(knife, map);
+    keepBaguetteNodeTile();
+    keepKnifePathClear();
 
     if (!font.loadFromFile("Hot Food.otf")) {
         std::cerr << "Error loading font" << std::endl;
@@ -376,12 +388,21 @@ void Match::updateMousePosWindow() {
     mousePosWindow = sf::Mouse::getPosition(*window);
 }
 
-void Match::setPlayingTime(const sf::Time &playingTime) {
-    Match::playingTime = playingTime;
+void Match::keepKnifePathClear() {
+    if (!knife->pathFound()) {
+        int i = 0;
+        for (auto it : map->getNode(0, 0)->neighbours) {
+            if (it.first->getID() == OBSTACLE) {
+                i++;
+            }
+        }
+        std::cout << "obstacles: " << i << std::endl;
+    }
 }
 
-const sf::Clock &Match::getTimer() const {
-    return timer;
+
+void Match::keepBaguetteNodeTile() {
+    std::cout << "start node ID BEFORE: " << map->getNode(baguette->getPosX(), baguette->getPosY())->getID() << std::endl;
+    map->getNode(baguette->getPosX(), baguette->getPosY())->setID(TILE);
+    std::cout << "start node ID AFTER: " << map->getNode(baguette->getPosX(), baguette->getPosY())->getID() << std::endl;
 }
-
-

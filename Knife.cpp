@@ -2,7 +2,7 @@
 Knife::Knife() : currentPathIndex(0) {
     posx = 0;
     posy = 0;
-    if (!texture.loadFromFile("KplayingR.png")) {
+    if (!texture.loadFromFile("./res/KplayingR.png")) {
         std::cerr << "Error loading texture" << std::endl;
     }
     shape.setTexture(&texture);
@@ -45,13 +45,13 @@ void Knife::update(Graph* map) {
             if (newPosx > posx) {
                 right = true;
                 left = false;
-                if (!texture.loadFromFile("KplayingR.png")) {
+                if (!texture.loadFromFile("./res/KplayingR.png")) {
                     std::cerr << "Error loading texture" << std::endl;
                 }
             } else if (newPosx < posx) {
                 left = true;
                 right= false;
-                if (!texture.loadFromFile("KplayingL.png")) {
+                if (!texture.loadFromFile("./res/KplayingL.png")) {
                     std::cerr <<"Error loading texture" << std::endl;
                 }
             }

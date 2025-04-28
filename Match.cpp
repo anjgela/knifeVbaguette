@@ -309,7 +309,7 @@ void Match::initVariables() {
     keepBaguetteNodeTile();
     keepKnifePathClear();
 
-    if (!font.loadFromFile("Hot Food.otf")) {
+    if (!font.loadFromFile("./res/Hot Food.otf")) {
         std::cerr << "Error loading font" << std::endl;
     }
     //pause variables
@@ -331,13 +331,13 @@ void Match::initVariables() {
     gameOverText.setPosition(60.f, 50.f);
     gameOverKnifeShape.setSize(sf::Vector2f(300.f, 500.f));
     gameOverKnifeShape.setPosition(1000.f,150.f);
-    if(!gameOverKnifeTexture.loadFromFile("Kgameover.png")) {
+    if(!gameOverKnifeTexture.loadFromFile("./res/Kgameover.png")) {
         std::cerr << "Error loading texture" << std::endl;
     }
     gameOverKnifeShape.setTexture(&gameOverKnifeTexture);
     gameOverBaguetteShape.setSize(sf::Vector2f(300.f,500.f));
     gameOverBaguetteShape.setPosition(sf::Vector2f(650.f, 150.f));
-    if (!gameOverBaguetteTexture.loadFromFile("Bgameover.png")) {
+    if (!gameOverBaguetteTexture.loadFromFile("./res/Bgameover.png")) {
     std::cerr << "Error loading texture" << std::endl;
     }
     gameOverBaguetteShape.setTexture(&gameOverBaguetteTexture);
@@ -348,13 +348,13 @@ void Match::initVariables() {
     winText.setPosition(60.f, 50.f);
     winKnifeShape.setSize(sf::Vector2f(300.f, 500.f));
     winKnifeShape.setPosition(1000.f,150.f);
-    if(!winKnifeTexture.loadFromFile("Kwin.png")) {
+    if(!winKnifeTexture.loadFromFile("./res/Kwin.png")) {
         std::cerr << "Error loading texture" << std::endl;
     }
     winKnifeShape.setTexture(&winKnifeTexture);
     winBaguetteShape.setSize(sf::Vector2f(300.f,500.f));
     winBaguetteShape.setPosition(sf::Vector2f(650.f, 150.f));
-    if (!winBaguetteTexture.loadFromFile("Bwin.png")) {
+    if (!winBaguetteTexture.loadFromFile("./res/Bwin.png")) {
         std::cerr << "Error loading texture" << std::endl;
     }
     winBaguetteShape.setTexture(&winBaguetteTexture);

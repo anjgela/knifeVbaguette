@@ -64,7 +64,7 @@ void Menu::initWindow() {
 }
 void Menu::initVariables() {
     //font
-    if (!font.loadFromFile("Hot Food.otf")) {
+    if (!font.loadFromFile("./res/Hot Food.otf")) {
         std::cerr << "Error loading font" << std::endl;
     }
 

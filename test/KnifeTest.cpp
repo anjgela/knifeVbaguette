@@ -40,11 +40,32 @@ TEST_F(KnifeFixture, MovesTowardTargetIfPathExists) {
     while (playingTime.getElapsedTime() < sf::seconds(1.5f)) {
         knife->update(map);
     }
-    if (knife->getPath().size() == 0) {
+    if (!knife->pathFound()) {
         EXPECT_EQ(knife->getPosX(), 0);
         EXPECT_EQ(knife->getPosY(), 0);
     } else {
         EXPECT_EQ(knife->getPosX(), 7);
         EXPECT_EQ(knife->getPosY(), 5);
+    }
+}
+
+TEST_F(KnifeFixture, FollowsPath) {
+    knife->move(baguette->getPosX(), baguette->getPosY(), map);
+    if (knife->pathFound()) {
+        size_t pathIndex = 0;
+        while (pathIndex < knife->getPath().size()) {
+            knife->update(map);
+            int newX = knife->getPath()[pathIndex].getX();
+            int newY = knife->getPath()[pathIndex].getY();
+
+            if (knife->getPosX() == newX && knife->getPosY() == newY) {
+                EXPECT_EQ(knife->getPosX(), newX);
+                EXPECT_EQ(knife->getPosY(), newY);
+                ++pathIndex;
+            }
+        }
+    } else {
+        EXPECT_EQ(knife->getPosX(), 0);
+        EXPECT_EQ(knife->getPosY(), 0);
     }
 }

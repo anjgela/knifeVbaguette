@@ -4,7 +4,7 @@
 Baguette::Baguette(Knife* knife, Graph* map) : enemy(knife) {
     posx = 7;
     posy = 5;
-    if (!texture.loadFromFile("BplayingR.png")) {
+    if (!texture.loadFromFile("./res/BplayingR.png")) {
         std::cerr << "Error loading texture" << std::endl;
     }
     shape.setTexture(&texture);
@@ -20,14 +20,14 @@ Baguette::~Baguette() {
 void Baguette::update(Graph* map) {
     if (clock.getElapsedTime().asSeconds() > 0.05f) {
         if (right) {
-            if (!texture.loadFromFile("BplayingR.png")) {
+            if (!texture.loadFromFile("./res/BplayingR.png")) {
                 std::cerr << "Error loading texture" << std::endl;
             }
             shape.setTexture(&texture);
             moveRight(map);
         }
         if (left) {
-            if (!texture.loadFromFile("BplayingL.png")) {
+            if (!texture.loadFromFile("./res/BplayingL.png")) {
                 std::cerr << "Error loading texture" << std::endl;
             }
             shape.setTexture(&texture);

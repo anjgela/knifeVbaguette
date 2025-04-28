@@ -75,14 +75,14 @@ bool Graph::isWalkable(int x, int y) const {
 int Graph::getWidth() const {
     return width;
 }
-void Graph::setWidth(int width) {
-    Graph::width = width;
+void Graph::setWidth(int w) {
+    width = w;
 }
 int Graph::getHeight() const {
     return height;
 }
-void Graph::setHeight(int height) {
-    Graph::height = height;
+void Graph::setHeight(int h) {
+    height = h;
 }
 
 Node* Graph::getNode(int x, int y) const{

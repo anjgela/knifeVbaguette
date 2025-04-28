@@ -14,6 +14,7 @@ public:
 
     int getPosX();
     int getPosY();
+
     sf::RectangleShape getShape() const;
 
     void setPosX(int x);

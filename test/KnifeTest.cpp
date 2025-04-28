@@ -2,8 +2,6 @@
 #include <iostream>
 #include "../Knife.h"
 #include "../Baguette.h"
-#include "../Graph.h"
-
 class KnifeFixture : public ::testing::Test {
 protected:
     Knife* knife;

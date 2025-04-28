@@ -3,6 +3,7 @@
 //public
 Node::Node(NodeType id) : ID(id), x(0), y(0) {
     setCost();
+    vertex = nullptr;
     shape.setSize(sf::Vector2f(50.f, 50.f));
     updateGraphics();
 }

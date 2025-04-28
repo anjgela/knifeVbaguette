@@ -20,16 +20,16 @@ public:
 
     Baguette* getBaguette() const;
     Knife* getKnife() const;
+    Graph *getMap() const;
 
     void update();
     void render();
     bool isWindowOpen() const;
     gameStatus checkGameStatus();
-    gameStatus getGameStatus() const;
-    sf::Time getPlayingTime() const;
-    void setPlayingTime(const sf::Time &playingTime);
-    const sf::Clock &getTimer() const;
     void fastForwardTimer(sf::Time dt);
+
+    void keepKnifePathClear();
+    void keepBaguetteNodeTile();
 
     bool isPaused() const;
     void togglePause();
@@ -41,8 +41,7 @@ private:
     void initVariables();
     void initWindow();
     void updateMousePosWindow();
-    void keepKnifePathClear();
-    void keepBaguetteNodeTile();
+
 
 private:
     sf::RenderWindow* window;

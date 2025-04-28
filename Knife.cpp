@@ -69,15 +69,10 @@ std::vector<MapSearch> Knife::getPath() const {
     return path;
 }
 
-sf::RectangleShape Knife::getShape() const {
-    return shape;
-}
-
 sf::Clock Knife::getClock() const {
     return clock;
 }
 
 bool Knife::pathFound() const {
-    std::cout << "path size: " << path.size() << std::endl;
     return !path.empty();
 }

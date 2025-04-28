@@ -2,7 +2,6 @@
 #include "../Match.h"
 
 
-
 TEST(Match, StartsInPlaying){
     Match* match;
     match = new Match();

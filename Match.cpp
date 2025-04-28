@@ -21,6 +21,10 @@ Knife* Match::getKnife() const {
     return knife;
 }
 
+Graph* Match::getMap() const {
+    return map;
+}
+
 void Match::update() {
     if (!paused) {
         sf::Time elapsed = playingTime + timer.getElapsedTime();
@@ -100,20 +104,33 @@ gameStatus Match::checkGameStatus() {
     }
     return status;
 }
-gameStatus Match::getGameStatus() const {
-    return status;
+
+void Match::fastForwardTimer(sf::Time dt) {
+    playingTime += dt;
 }
 
-sf::Time Match::getPlayingTime() const {
-    return playingTime;
+void Match::keepKnifePathClear() {
+    int i = 3;
+    int j = i/2;
+    int x = 0;
+    int y = 0;
+    while (!knife->pathFound()) {
+        for (auto it: map->getNode(x, y)->neighbours) {
+            if (i > j && it.first->getID() == OBSTACLE) {
+                it.first->setID(TILE);
+                i--;
+            }
+        }
+        i += 8;
+        j = i/2;
+        x += 1;
+        y += 1;
+        knife->move(baguette->getPosX(), baguette->getPosY(), map);
+    }
 }
 
-void Match::setPlayingTime(const sf::Time &playingTime) {
-    Match::playingTime = playingTime;
-}
-
-const sf::Clock &Match::getTimer() const {
-    return timer;
+void Match::keepBaguetteNodeTile() {
+    map->getNode(baguette->getPosX(), baguette->getPosY())->setID(TILE);
 }
 
 bool Match::isPaused() const {
@@ -127,10 +144,6 @@ void Match::togglePause() {
         playingTime += timer.getElapsedTime();
     }
     paused = !paused;
-}
-
-void Match::fastForwardTimer(sf::Time dt) {
-    playingTime += dt;
 }
 
 //private
@@ -388,21 +401,6 @@ void Match::updateMousePosWindow() {
     mousePosWindow = sf::Mouse::getPosition(*window);
 }
 
-void Match::keepKnifePathClear() {
-    if (!knife->pathFound()) {
-        int i = 0;
-        for (auto it : map->getNode(0, 0)->neighbours) {
-            if (it.first->getID() == OBSTACLE) {
-                i++;
-            }
-        }
-        std::cout << "obstacles: " << i << std::endl;
-    }
-}
 
 
-void Match::keepBaguetteNodeTile() {
-    std::cout << "start node ID BEFORE: " << map->getNode(baguette->getPosX(), baguette->getPosY())->getID() << std::endl;
-    map->getNode(baguette->getPosX(), baguette->getPosY())->setID(TILE);
-    std::cout << "start node ID AFTER: " << map->getNode(baguette->getPosX(), baguette->getPosY())->getID() << std::endl;
-}
+

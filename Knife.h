@@ -16,7 +16,6 @@ public:
     void move(int x, int y, Graph* map);
     void update(Graph* map) override;
     std::vector<MapSearch> getPath() const;
-    sf::RectangleShape getShape() const;
     sf::Clock getClock() const;
 
     bool pathFound() const;

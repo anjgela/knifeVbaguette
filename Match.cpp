@@ -30,15 +30,15 @@ void Match::update() {
         sf::Time elapsed = playingTime + timer.getElapsedTime();
         std::stringstream ss;
         if (checkGameStatus() == PLAYING) {
-            ss << "TIME: " << static_cast<int>(45-elapsed.asSeconds());
+            ss << "TIME: " << static_cast<int>(gameTime.asSeconds()-elapsed.asSeconds());
             timerText.setString(ss.str());
-            if (elapsed.asSeconds() < 35) {
+            if (elapsed.asSeconds() < (gameTime.asSeconds()-10)) {
                 timerShape.setFillColor(sf::Color(0, 0, 0, 150));
             }
-            if (elapsed.asSeconds() > 34) {
+            if (elapsed.asSeconds() > (gameTime.asSeconds()-9)) {
                 timerShape.setFillColor(sf::Color(255, 0, 0, 150));
             }
-            if (elapsed.asSeconds() > 45) {
+            if (elapsed.asSeconds() > gameTime.asSeconds()) {
                 timer.restart();
                 playingTime = sf::Time::Zero;
                 status = WIN;

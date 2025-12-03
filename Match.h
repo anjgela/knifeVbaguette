@@ -86,6 +86,7 @@ private:
     sf::Time playingTime;
     sf::RectangleShape timerShape;
     sf::Text timerText;
+    sf::Time gameTime = sf::seconds(30);
 };
 
 
